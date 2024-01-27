@@ -1,14 +1,9 @@
 package dev.paw.uniformity.modules;
 
 import dev.paw.uniformity.Uniformity;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.*;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 

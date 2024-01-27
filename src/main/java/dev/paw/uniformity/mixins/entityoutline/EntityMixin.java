@@ -48,7 +48,6 @@ public abstract class EntityMixin {
 
         if (entity instanceof PlayerEntity && Uniformity.config.entityOutline.playerHighlight) {
             cir.setReturnValue(Color.hex(Uniformity.config.entityOutline.playerHighlightHex).asInt);
-            return;
         }
     }
 }

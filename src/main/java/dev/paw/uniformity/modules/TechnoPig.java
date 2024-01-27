@@ -1,6 +1,5 @@
 package dev.paw.uniformity.modules;
 
-import dev.paw.uniformity.Uniformity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;

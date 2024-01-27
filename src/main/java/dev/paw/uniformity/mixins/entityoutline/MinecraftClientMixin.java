@@ -1,7 +1,6 @@
 package dev.paw.uniformity.mixins.entityoutline;
 
 import dev.paw.uniformity.Uniformity;
-import dev.paw.uniformity.utils.Color;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.GameOptions;
