@@ -7,8 +7,7 @@
         "beeinfo.ItemStackMixin",
         "chathistory.ChatHudMixin",
         "entityoutline.EntityMixin",
-        "freecam.EntityMixin",
-        "nopotionparticles.LivingEntityMixin"
+        "freecam.EntityMixin"
     ],
     "client": [
         "TitleScreenMixin",
