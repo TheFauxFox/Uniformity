@@ -33,7 +33,7 @@ then
   echo "Cancelled"
 else
   sed -i "s/$VERSION\+/$MAJOR.$MINOR.$PATCH/" gradle.properties
-  TAG=$(grep -oP '^version = \K.*' gradle.properties)
+  TAG=$(grep -oP '^version=\K.*' gradle.properties)
   echo -e "\nNew Tag: v$TAG"
 
   git add gradle.properties
