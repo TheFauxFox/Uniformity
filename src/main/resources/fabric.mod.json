@@ -1,0 +1,32 @@
+{
+    "schemaVersion": 1,
+    "id": "uniformity",
+    "version": "${version}",
+    "name": "Uniformity",
+    "description": "",
+    "authors": [
+        "Faux"
+    ],
+    "contact": {
+        "website": "https://github.com/TheFauxFox",
+        "repo": "https://github.com/TheFauxFox/Uniformity"
+    },
+    "license": "MIT",
+    "icon": "assets/uniformity/icon.png",
+    "environment": "client",
+    "entrypoints": {
+        "client": [
+            "dev.paw.uniformity.Uniformity"
+        ],
+        "modmenu": [
+            "dev.paw.uniformity.config.ModMenu"
+        ]
+    },
+    "mixins": [
+        "uniformity.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${loader_version}",
+        "minecraft": ">=${minecraft_version}"
+    }
+}
