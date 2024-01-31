@@ -26,7 +26,6 @@ public class ModConfig implements ConfigData {
     public boolean freecamToggle = false;
     public boolean creativeToolsToggle = true;
     public boolean entityOutlineToggle = false;
-    public boolean hidePotionParticlesToggle = true;
     public boolean noFogToggle = true;
     public boolean noHurtAngleToggle = true;
     public boolean lowFireToggle = true;
