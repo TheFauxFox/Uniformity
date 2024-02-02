@@ -1,5 +1,6 @@
 package dev.paw.uniformity.utils;
 
+@SuppressWarnings("unused")
 public class Color {
     public static Color DARK_RED = Color.rgb(170, 0, 0);
     public static Color RED = Color.rgb(255, 85, 85);
