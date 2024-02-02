@@ -110,9 +110,7 @@ public class Uniformity implements ClientModInitializer {
             }
         });
         if (config.disableTutorialToast) {
-            MinecraftClient.getInstance().execute(() -> {
-                MinecraftClient.getInstance().getTutorialManager().setStep(TutorialStep.NONE);
-            });
+            MinecraftClient.getInstance().execute(() -> MinecraftClient.getInstance().getTutorialManager().setStep(TutorialStep.NONE));
         }
     }
 

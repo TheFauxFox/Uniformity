@@ -98,7 +98,6 @@ public class InGameHudMixin {
                 }
                 if (Uniformity.config.displayInfo.lightLevel) {
                     context.drawTextWithShadow(client.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.lightSky", skyL), x, y, Color.WHITE.asInt);
-                    y += 11;
                 }
             }
             context.getMatrices().pop();

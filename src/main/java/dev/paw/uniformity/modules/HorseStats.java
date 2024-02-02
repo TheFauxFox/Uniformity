@@ -42,7 +42,7 @@ public class HorseStats extends Module {
         int textLeft = x1 + 4;
         int textTop = y1 + 5;
 
-        DecimalFormat df = new DecimalFormat("#.#");
+        DecimalFormat df = new DecimalFormat("#.##");
 
         double horseSpeed = entity.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) * 42.157796;
         double jumpHeight = 0;
