@@ -26,7 +26,7 @@ public class Color {
         this.green = green;
         this.blue = blue;
         this.alpha = alpha;
-        this.asInt = (this.alpha << 24) + (this.blue << 16) + (this.green << 8) + this.red;
+        this.asInt = (this.alpha << 24) | (this.red << 16) | (this.green << 8) | this.blue;
         this.asHex = Integer.toHexString(asInt).substring(2);
     }
 

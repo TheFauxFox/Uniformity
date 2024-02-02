@@ -5,4 +5,7 @@ public class Number {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
+    public static double round(double val, int places) {
+        return Math.round(val * Math.pow(10, places)) / Math.pow(10, places);
+    }
 }

@@ -1,5 +1,7 @@
 {
     "dev.paw.uniformity.name": "Uniformity",
+    "dev.paw.uniformity.enabled": "§f§l\uD835\uDCE4§8 » §aEnabled§7 %s",
+    "dev.paw.uniformity.disabled": "§f§l\uD835\uDCE4§8 » §cDisabled§7 %s",
     
     "dev.paw.uniformity.creative_tools": "§dCreative Tools",
     
@@ -19,6 +21,21 @@
     "dev.paw.uniformity.keybind.antitoolbreakOverride": "Override Anti Tool Break",
     "dev.paw.uniformity.keybind.entityoutline": "Toggle Entity Outline",
     
+    "dev.paw.uniformity.fpsdisplay.fpsTitle": "%d FPS",
+    "dev.paw.uniformity.displayInfo.speedDisplay": "Speed: %.2f b/s",
+    "dev.paw.uniformity.displayInfo.positionTitle": "Pos:",
+    "dev.paw.uniformity.displayInfo.positionX": " X: %.2f",
+    "dev.paw.uniformity.displayInfo.positionY": " Y: %.2f",
+    "dev.paw.uniformity.displayInfo.positionZ": " Z: %.2f",
+    "dev.paw.uniformity.displayInfo.netherPosTitle": "Nether:",
+    "dev.paw.uniformity.displayInfo.netherPosX": " X: %.2f",
+    "dev.paw.uniformity.displayInfo.netherPosZ": " Z: %.2f",
+    "dev.paw.uniformity.displayInfo.biomeTitle": "Biome:",
+    "dev.paw.uniformity.displayInfo.biome": " %s",
+    "dev.paw.uniformity.displayInfo.lightLevelTitle": "Light:",
+    "dev.paw.uniformity.displayInfo.lightBlock": " Block: %d",
+    "dev.paw.uniformity.displayInfo.lightSky": " Sky: %d",
+    
     "text.autoconfig.uniformity.title": "Uniformity Config",
     "text.autoconfig.uniformity.option.toolBreakToggle": "Anti Tool Break",
     "text.autoconfig.uniformity.option.chatHistoryToggle": "Longer Chat History",
@@ -34,6 +51,7 @@
     "text.autoconfig.uniformity.option.freecamToggle": "Freecam",
     "text.autoconfig.uniformity.option.creativeToolsToggle": "Show Creative Tools",
     "text.autoconfig.uniformity.option.fpsToggle": "Show FPS",
+    "text.autoconfig.uniformity.option.displayInfoToggle": "Info Display",
     "text.autoconfig.uniformity.option.entityOutlineToggle": "Outline Entities",
     "text.autoconfig.uniformity.option.noFogToggle": "Disable Fog",
     "text.autoconfig.uniformity.option.noHurtAngleToggle": "Disable Damage Tilt",
@@ -80,5 +98,13 @@
     "text.autoconfig.uniformity.option.entityOutline.angerableHighlight": "Highlight angerable",
     "text.autoconfig.uniformity.option.entityOutline.angerableHighlightHex": "Angerable hex color",
     "text.autoconfig.uniformity.option.entityOutline.playerHighlight": "Highlight players",
-    "text.autoconfig.uniformity.option.entityOutline.playerHighlightHex": "Player hex color"
+    "text.autoconfig.uniformity.option.entityOutline.playerHighlightHex": "Player hex color",
+    
+    "text.autoconfig.uniformity.option.displayInfo": "Display info options",
+    "text.autoconfig.uniformity.option.displayInfo.netherCoords": "Show Nether coordinates",
+    "text.autoconfig.uniformity.option.displayInfo.coords": "Show Overworld coordinates",
+    "text.autoconfig.uniformity.option.displayInfo.speed": "Show speed",
+    "text.autoconfig.uniformity.option.displayInfo.biome": "Show biome",
+    "text.autoconfig.uniformity.option.displayInfo.lightLevel": "Show sky light level",
+    "text.autoconfig.uniformity.option.displayInfo.blockLevel": "Show block light level"
 }

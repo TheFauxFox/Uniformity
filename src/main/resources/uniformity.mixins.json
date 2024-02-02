@@ -27,6 +27,7 @@
         "freecam.WorldRendererMixin",
         "fullbright.LightmapTextureManagerMixin",
         "horsestats.HorseScreenMixin",
+        "displayinfo.InGameHudMixin",
         "lowfire.InGameOverlayRendererMixin",
         "nofog.BackgroundRendererMixin",
         "nohurtangle.GameRendererMixin",

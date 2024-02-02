@@ -101,7 +101,7 @@ public class Uniformity implements ClientModInitializer {
                         MinecraftClient
                                 .getInstance()
                                 .inGameHud
-                                .setOverlayMessage(Text.of("§7§l\uD835\uDCE4§8 » " + (v?"§aEnabled":"§cDisabled") + "§7 " + m.name), true);
+                                .setOverlayMessage(Text.translatable(v ? "dev.paw.uniformity.enabled" : "dev.paw.uniformity.disabled", m.name), false);
                         wasKeybindSave = true;
                         configHolder.save();
                     }
@@ -111,7 +111,7 @@ public class Uniformity implements ClientModInitializer {
         });
         if (config.disableTutorialToast) {
             MinecraftClient.getInstance().execute(() -> {
-                MinecraftClient.getInstance().getTutorialManager().setStep(TutorialStep.NONE); // Fuck you.
+                MinecraftClient.getInstance().getTutorialManager().setStep(TutorialStep.NONE);
             });
         }
     }

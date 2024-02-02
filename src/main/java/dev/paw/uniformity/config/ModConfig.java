@@ -10,6 +10,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 @Config.Gui.Background(value="cloth-config2:transparent")
 public class ModConfig implements ConfigData {
     public boolean fpsToggle = true;
+    public boolean displayInfoToggle = false;
     public boolean toolBreakToggle = true;
     public boolean chatHistoryToggle = true;
     public boolean beeInfoToggle = true;
@@ -47,6 +48,9 @@ public class ModConfig implements ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject
     public EntityOutline entityOutline = new EntityOutline();
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public DisplayInfo displayInfo = new DisplayInfo();
 
     public static class AntiToolBreak {
         public int duraValue = 5;
@@ -95,5 +99,14 @@ public class ModConfig implements ConfigData {
         public String angerableHighlightHex = Color.YELLOW.asHex;
         public boolean playerHighlight = true;
         public String playerHighlightHex = Color.DARK_PURPLE.asHex;
+    }
+
+    public static class DisplayInfo {
+        public boolean coords = true;
+        public boolean netherCoords = true;
+        public boolean speed = true;
+        public boolean biome = true;
+        public boolean lightLevel = true;
+        public boolean blockLevel = true;
     }
 }
