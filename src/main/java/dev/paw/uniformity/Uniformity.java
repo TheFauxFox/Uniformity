@@ -62,6 +62,7 @@ public class Uniformity implements ClientModInitializer {
         modules.add(zoom);
         modules.add(new ReCycler());
         modules.add(new DisplayInfo());
+        modules.add(new AutoFish());
     }
 
     @Override

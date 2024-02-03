@@ -38,6 +38,7 @@
     "dev.paw.uniformity.keybind.antitoolbreakOverride": "Override Anti Tool Break",
     "dev.paw.uniformity.keybind.entityoutline": "Toggle Entity Outline",
     "dev.paw.uniformity.keybind.recycler": "Toggle ReCycler",
+    "dev.paw.uniformity.keybind.autofish": "Toggle AutoFish",
     
     "dev.paw.uniformity.fpsdisplay.fpsTitle": "%d FPS",
     "dev.paw.uniformity.displayInfo.speedDisplay": "Speed: %.2f b/s",
@@ -83,6 +84,7 @@
     "text.autoconfig.uniformity.option.noFogToggle": "Disable Fog",
     "text.autoconfig.uniformity.option.noHurtAngleToggle": "Disable Damage Tilt",
     "text.autoconfig.uniformity.option.lowFireToggle": "Enable Low Fire",
+    "text.autoconfig.uniformity.option.autoFishToggle": "Enable Auto Fish",
     
     "text.autoconfig.uniformity.option.antiToolBreak": "Anti tool break options",
     "text.autoconfig.uniformity.option.antiToolBreak.duraValue": "Durability value",

@@ -33,6 +33,7 @@ public class ModConfig implements ConfigData {
     /* RECYCLER MUST ALWAYS BE DISABLED */
     @ConfigEntry.Gui.Excluded
     public boolean recyclerToggle = false;
+    public boolean autoFishToggle = false;
 
     @ConfigEntry.Gui.CollapsibleObject
     public NumericPing numericPing = new NumericPing();

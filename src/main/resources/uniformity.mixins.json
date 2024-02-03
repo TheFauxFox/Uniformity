@@ -4,6 +4,7 @@
     "package": "dev.paw.uniformity.mixins",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
+        "autofish.FishingBobberEntityMixin",
         "beeinfo.ItemStackMixin",
         "chathistory.ChatHudMixin",
         "entityoutline.EntityMixin",
