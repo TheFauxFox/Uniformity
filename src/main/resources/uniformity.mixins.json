@@ -7,7 +7,8 @@
         "beeinfo.ItemStackMixin",
         "chathistory.ChatHudMixin",
         "entityoutline.EntityMixin",
-        "freecam.EntityMixin"
+        "freecam.EntityMixin",
+        "recycler.ClientConnectionMixin"
     ],
     "client": [
         "TitleScreenMixin",
@@ -16,6 +17,7 @@
         "chatreporttoast.ClientPlayNetworkHandlerMixin",
         "creativetools.CreativeInventoryScreenMixin",
         "darkloading.SplashOverlayMixin",
+        "displayinfo.InGameHudMixin",
         "entityoutline.MinecraftClientMixin",
         "fpsdisplay.InGameHudMixin",
         "freecam.CameraMixin",
@@ -27,12 +29,13 @@
         "freecam.WorldRendererMixin",
         "fullbright.LightmapTextureManagerMixin",
         "horsestats.HorseScreenMixin",
-        "displayinfo.InGameHudMixin",
         "lowfire.InGameOverlayRendererMixin",
         "nofog.BackgroundRendererMixin",
         "nohurtangle.GameRendererMixin",
         "notoolbreak.MinecraftClientMixin",
         "numericping.PlayerListHudMixin",
+        "recycler.MouseMixin",
+        "recycler.WorldRendererMixin",
         "technopig.PigEntityRendererMixin",
         "zoom.GameRendererMixin",
         "zoom.MouseMixin"

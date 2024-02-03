@@ -20,13 +20,18 @@ public class Color {
     public static Color BLACK = Color.rgb(0, 0, 0);
 
     public int red, green, blue, alpha, asInt;
+    public float floatRed, floatGreen, floatBlue, floatAlpha;
     public String asHex;
 
     private Color(int red, int green, int blue, int alpha) {
         this.red = red;
+        this.floatRed = red / 255.0f;
         this.green = green;
+        this.floatGreen = green / 255.0f;
         this.blue = blue;
+        this.floatBlue = blue / 255.0f;
         this.alpha = alpha;
+        this.floatAlpha = alpha / 255.0f;
         this.asInt = (this.alpha << 24) | (this.red << 16) | (this.green << 8) | this.blue;
         this.asHex = Integer.toHexString(asInt).substring(2);
     }
@@ -37,6 +42,14 @@ public class Color {
 
     public static Color rgba(int r, int g, int b, int a) {
         return new Color(r, g, b, a);
+    }
+
+    public static Color integer(int color) {
+        int a = ((color >> 24) & 0xff);
+        int r = ((color >> 16) & 0xff);
+        int g = ((color >>  8) & 0xff);
+        int b = ((color      ) & 0xff);
+        return Color.rgba(r, g, b, a);
     }
 
     public static Color hex(String hex) {

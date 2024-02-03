@@ -1,6 +1,7 @@
 package dev.paw.uniformity;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import dev.paw.uniformity.commands.ReCyclerCmd;
 import dev.paw.uniformity.config.ModConfig;
 import dev.paw.uniformity.modules.*;
 import dev.paw.uniformity.modules.Module;
@@ -8,6 +9,7 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -49,6 +51,7 @@ public class Uniformity implements ClientModInitializer {
         });
         configHolder.load();
         config.freecamToggle = false;
+        config.recyclerToggle = false;
         modules.add(new Fullbright());
         modules.add(new Step());
         modules.add(new NumericPing());
@@ -57,6 +60,8 @@ public class Uniformity implements ClientModInitializer {
         modules.add(new Freecam());
         modules.add(new EntityOutline());
         modules.add(zoom);
+        modules.add(new ReCycler());
+        modules.add(new DisplayInfo());
     }
 
     @Override
@@ -69,6 +74,9 @@ public class Uniformity implements ClientModInitializer {
                 KeyBindingHelper.registerKeyBinding(kbm.keyBind);
             }
         }
+        ClientCommandRegistrationCallback.EVENT.register(
+                (dispatcher, registryAccess) -> new ReCyclerCmd(dispatcher)
+        );
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.OPERATOR).register(content -> {
             try {
                 ItemStack pot = Items.SPLASH_POTION.getDefaultStack();
@@ -101,7 +109,7 @@ public class Uniformity implements ClientModInitializer {
                         MinecraftClient
                                 .getInstance()
                                 .inGameHud
-                                .setOverlayMessage(Text.translatable(v ? "dev.paw.uniformity.enabled" : "dev.paw.uniformity.disabled", m.name), false);
+                                .setOverlayMessage(Text.translatable("dev.paw.uniformity.prefix").append(Text.translatable(v ? "dev.paw.uniformity.enabled" : "dev.paw.uniformity.disabled", m.name)), false);
                         wasKeybindSave = true;
                         configHolder.save();
                     }
@@ -112,6 +120,13 @@ public class Uniformity implements ClientModInitializer {
         if (config.disableTutorialToast) {
             MinecraftClient.getInstance().execute(() -> MinecraftClient.getInstance().getTutorialManager().setStep(TutorialStep.NONE));
         }
+    }
+
+    public static void sendPrefixedMessage(Text msg) {
+        MinecraftClient.getInstance()
+                .inGameHud
+                .getChatHud()
+                .addMessage(Text.translatable("dev.paw.uniformity.prefix").append(msg));
     }
 
     @SuppressWarnings("unchecked")

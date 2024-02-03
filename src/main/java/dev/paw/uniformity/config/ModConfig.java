@@ -30,6 +30,9 @@ public class ModConfig implements ConfigData {
     public boolean noFogToggle = true;
     public boolean noHurtAngleToggle = true;
     public boolean lowFireToggle = true;
+    /* RECYCLER MUST ALWAYS BE DISABLED */
+    @ConfigEntry.Gui.Excluded
+    public boolean recyclerToggle = false;
 
     @ConfigEntry.Gui.CollapsibleObject
     public NumericPing numericPing = new NumericPing();
@@ -108,5 +111,6 @@ public class ModConfig implements ConfigData {
         public boolean biome = true;
         public boolean lightLevel = true;
         public boolean blockLevel = true;
+        public boolean showRecycler = true;
     }
 }

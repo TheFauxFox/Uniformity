@@ -1,7 +1,24 @@
 {
     "dev.paw.uniformity.name": "Uniformity",
-    "dev.paw.uniformity.enabled": "§f§l\uD835\uDCE4§8 » §aEnabled§7 %s",
-    "dev.paw.uniformity.disabled": "§f§l\uD835\uDCE4§8 » §cDisabled§7 %s",
+    "dev.paw.uniformity.prefix": "§f§l\uD835\uDCE4§8 » ",
+    "dev.paw.uniformity.enabled": "§aEnabled§7 %s",
+    "dev.paw.uniformity.disabled": "§cDisabled§7 %s",
+    "dev.paw.uniformity.check": "§a✔",
+    "dev.paw.uniformity.cross": "§c✗",
+    
+    "dev.paw.uniformity.recycler.prefix": "§a§l[§f§lRe§a§lCycler]§7 ",
+    "dev.paw.uniformity.recycler.startMessage": "Go afk or something, this could take a bit",
+    "dev.paw.uniformity.recycler.timeTakenMessage": "§aTook §2%s",
+    "dev.paw.uniformity.recycler.setLecturnMessage": "Sucessfully set lectern position!",
+    "dev.paw.uniformity.recycler.setVillagerMessage": "Sucessfully set Villager!",
+    "dev.paw.uniformity.recycler.axeDurabilityMessage": "§cStopped due to axe durability!",
+    "dev.paw.uniformity.recycler.bookFoundMessage": "§aThe book has been found! Book: %s Price: %d",
+    "dev.paw.uniformity.recycler.sanityVillager": "Please shift right click on a librarian villager!",
+    "dev.paw.uniformity.recycler.sanityVillagerDistance": "Please get closer to the villager!",
+    "dev.paw.uniformity.recycler.sanityLecturn": "Please shift right click on a lectern near the villager!",
+    "dev.paw.uniformity.recycler.sanityMainOffHand": "Please hold a lectern in your offhand, and an axe in your mainhand!",
+    "dev.paw.uniformity.recycler.sanitySetEnchant": "Please run /recycler setEnchant <enchant> to continue!",
+    "dev.paw.uniformity.recycler.sanitySetThreshold": "Please run /recycler setThreshold <0-57> to continue!",
     
     "dev.paw.uniformity.creative_tools": "§dCreative Tools",
     
@@ -20,6 +37,7 @@
     "dev.paw.uniformity.keybind.freecam": "Toggle Freecam",
     "dev.paw.uniformity.keybind.antitoolbreakOverride": "Override Anti Tool Break",
     "dev.paw.uniformity.keybind.entityoutline": "Toggle Entity Outline",
+    "dev.paw.uniformity.keybind.recycler": "Toggle ReCycler",
     
     "dev.paw.uniformity.fpsdisplay.fpsTitle": "%d FPS",
     "dev.paw.uniformity.displayInfo.speedDisplay": "Speed: %.2f b/s",
@@ -35,6 +53,15 @@
     "dev.paw.uniformity.displayInfo.lightLevelTitle": "Light:",
     "dev.paw.uniformity.displayInfo.lightBlock": " Block: %d",
     "dev.paw.uniformity.displayInfo.lightSky": " Sky: %d",
+    
+    "dev.paw.uniformity.displayInfo.recycler.villager": " Villager: %s",
+    "dev.paw.uniformity.displayInfo.recycler.lecturn": " Lecturn: %s",
+    "dev.paw.uniformity.displayInfo.recycler.enchant": " Enchant: %s",
+    "dev.paw.uniformity.displayInfo.recycler.threshold": " Threshold: %s",
+    "dev.paw.uniformity.displayInfo.recycler.time": " Time: %s",
+    "dev.paw.uniformity.displayInfo.recycler.lastBook": " Last Book: %s",
+    "dev.paw.uniformity.displayInfo.recycler.lastValue": " Last Value: %s",
+    "dev.paw.uniformity.displayInfo.recycler.title": "ReCycler:",
     
     "text.autoconfig.uniformity.title": "Uniformity Config",
     "text.autoconfig.uniformity.option.toolBreakToggle": "Anti Tool Break",
@@ -106,5 +133,6 @@
     "text.autoconfig.uniformity.option.displayInfo.speed": "Show speed",
     "text.autoconfig.uniformity.option.displayInfo.biome": "Show biome",
     "text.autoconfig.uniformity.option.displayInfo.lightLevel": "Show sky light level",
-    "text.autoconfig.uniformity.option.displayInfo.blockLevel": "Show block light level"
+    "text.autoconfig.uniformity.option.displayInfo.blockLevel": "Show block light level",
+    "text.autoconfig.uniformity.option.displayInfo.showRecycler": "Show ReCycler info"
 }
