@@ -39,9 +39,7 @@ public class AutoRefill extends Module {
                 int i = inv.getSlotWithStack(lastItemMain.getDefaultStack());
                 mc.interactionManager.clickSlot(mc.player.currentScreenHandler.syncId, i, GLFW.GLFW_MOUSE_BUTTON_1, SlotActionType.PICKUP, mc.player);
 
-                Uniformity.scheduler.schedule(() -> {
-                    mc.interactionManager.clickSlot(mc.player.currentScreenHandler.syncId, mc.player.getInventory().selectedSlot + PlayerInventory.MAIN_SIZE, GLFW.GLFW_MOUSE_BUTTON_1, SlotActionType.PICKUP, mc.player);
-                }, Uniformity.config.autoRefill.refillMS, TimeUnit.MILLISECONDS);
+                Uniformity.scheduler.schedule(() -> mc.interactionManager.clickSlot(mc.player.currentScreenHandler.syncId, mc.player.getInventory().selectedSlot + PlayerInventory.MAIN_SIZE, GLFW.GLFW_MOUSE_BUTTON_1, SlotActionType.PICKUP, mc.player), Uniformity.config.autoRefill.refillMS, TimeUnit.MILLISECONDS);
             }
         } else if (swungHand == Hand.OFF_HAND && getOffItem() == Items.AIR && lastItemOffhand != Items.AIR) {
             if (inv.contains(lastItemOffhand.getDefaultStack())) {
@@ -49,22 +47,23 @@ public class AutoRefill extends Module {
                 int i = inv.getSlotWithStack(lastItemOffhand.getDefaultStack());
                 mc.interactionManager.clickSlot(mc.player.currentScreenHandler.syncId, i, GLFW.GLFW_MOUSE_BUTTON_1, SlotActionType.PICKUP, mc.player);
 
-                Uniformity.scheduler.schedule(() -> {
-                    mc.interactionManager.clickSlot(mc.player.currentScreenHandler.syncId, 45, GLFW.GLFW_MOUSE_BUTTON_1, SlotActionType.PICKUP, mc.player);
-                }, Uniformity.config.autoRefill.refillMS, TimeUnit.MILLISECONDS);
+                Uniformity.scheduler.schedule(() -> mc.interactionManager.clickSlot(mc.player.currentScreenHandler.syncId, 45, GLFW.GLFW_MOUSE_BUTTON_1, SlotActionType.PICKUP, mc.player), Uniformity.config.autoRefill.refillMS, TimeUnit.MILLISECONDS);
             }
         }
     }
 
     private int getSlot() {
+        if (mc.player == null) return 0;
         return mc.player.getInventory().selectedSlot;
     }
 
     private Item getMainItem() {
+        if (mc.player == null) return Items.AIR;
         return mc.player.getMainHandStack().getItem();
     }
 
     private Item getOffItem() {
+        if (mc.player == null) return Items.AIR;
         return mc.player.getOffHandStack().getItem();
     }
 
