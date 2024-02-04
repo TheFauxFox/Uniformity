@@ -85,6 +85,7 @@
     "text.autoconfig.uniformity.option.noHurtAngleToggle": "Disable Damage Tilt",
     "text.autoconfig.uniformity.option.lowFireToggle": "Enable Low Fire",
     "text.autoconfig.uniformity.option.autoFishToggle": "Enable Auto Fish",
+    "text.autoconfig.uniformity.option.autoRefillToggle": "Enable Auto Refill",
     
     "text.autoconfig.uniformity.option.antiToolBreak": "Anti tool break options",
     "text.autoconfig.uniformity.option.antiToolBreak.duraValue": "Durability value",
@@ -114,7 +115,7 @@
     "text.autoconfig.uniformity.option.freecam.highlightPlayer": "Show player outline",
     "text.autoconfig.uniformity.option.freecam.toggleOnDamage": "Disable freecam on damage",
     
-    "text.autoconfig.uniformity.option.autoReconnect": "AutoReconnect",
+    "text.autoconfig.uniformity.option.autoReconnect": "AutoReconnect options",
     "text.autoconfig.uniformity.option.autoReconnect.timeJitter": "Jitter time on reconnect",
     "text.autoconfig.uniformity.option.autoReconnect.reconnectSeconds": "Reconnect delay",
     "text.autoconfig.uniformity.option.autoReconnect.timeJitterSeconds": "Random time jitter",
@@ -136,5 +137,8 @@
     "text.autoconfig.uniformity.option.displayInfo.biome": "Show biome",
     "text.autoconfig.uniformity.option.displayInfo.lightLevel": "Show sky light level",
     "text.autoconfig.uniformity.option.displayInfo.blockLevel": "Show block light level",
-    "text.autoconfig.uniformity.option.displayInfo.showRecycler": "Show ReCycler info"
+    "text.autoconfig.uniformity.option.displayInfo.showRecycler": "Show ReCycler info",
+    
+    "text.autoconfig.uniformity.option.autoRefill": "AutoRefill options",
+    "text.autoconfig.uniformity.option.autoRefill.refillMS": "Refill delay in milliseconds"
 }

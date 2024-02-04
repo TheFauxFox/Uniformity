@@ -13,6 +13,9 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallba
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.tutorial.TutorialStep;
@@ -20,11 +23,15 @@ import net.minecraft.item.*;
 import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Uniformity implements ClientModInitializer {
     public static Logger logger = LoggerFactory.getLogger("Uniformity");
@@ -37,14 +44,22 @@ public class Uniformity implements ClientModInitializer {
     public static final KeyBinding configKeybind = new KeyBinding("dev.paw.uniformity.keybind.config_key", GLFW.GLFW_KEY_RIGHT_SHIFT, "dev.paw.uniformity.name");
     public static final KeyBinding antiToolBreakOverrideKeybind = new KeyBinding("dev.paw.uniformity.keybind.antitoolbreakOverride", GLFW.GLFW_KEY_GRAVE_ACCENT, "dev.paw.uniformity.name");
     public static final Zoom zoom = new Zoom();
+    public static final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     public Uniformity() {
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
+        FabricLoader.getInstance().getModContainer("uniformity").ifPresent(modContainer -> {
+            ResourceManagerHelper.registerBuiltinResourcePack(new Identifier("uniformity", "dark_gui"), modContainer, ResourcePackActivationType.NORMAL);
+            ResourceManagerHelper.registerBuiltinResourcePack(new Identifier("uniformity", "smooth_font"), modContainer, ResourcePackActivationType.NORMAL);
+        });
         configHolder = AutoConfig.getConfigHolder(ModConfig.class);
         config = configHolder.getConfig();
         configHolder.registerSaveListener((holder, cfg) -> {
             if (wasKeybindSave) {
-                holder.setConfig(config);
+                scheduler.schedule(() -> {
+                    holder.setConfig(config);
+                    configHolder.save();
+                }, 20, TimeUnit.MILLISECONDS);
                 wasKeybindSave = false;
             }
             return ActionResult.PASS;
@@ -63,6 +78,7 @@ public class Uniformity implements ClientModInitializer {
         modules.add(new ReCycler());
         modules.add(new DisplayInfo());
         modules.add(new AutoFish());
+        modules.add(new AutoRefill());
     }
 
     @Override

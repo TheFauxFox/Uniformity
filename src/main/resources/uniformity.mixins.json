@@ -15,6 +15,8 @@
         "TitleScreenMixin",
         "autoreconnect.DisconnectedScreenMixin",
         "autoreconnect.MinecraftClientMixin",
+        "autorefill.ClientPlayerEntityMixin",
+        "autorefill.MinecraftClientMixin",
         "chatreporttoast.ClientPlayNetworkHandlerMixin",
         "creativetools.CreativeInventoryScreenMixin",
         "darkloading.SplashOverlayMixin",
