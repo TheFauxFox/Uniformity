@@ -14,7 +14,7 @@ public class MinecraftClientMixin {
     @Inject(method = "doAttack", at = @At("HEAD"), cancellable = true)
     public void onDoAttack(CallbackInfoReturnable<Boolean> cir) {
         AntiToolBreak tb = Uniformity.getModule(AntiToolBreak.class);
-        if (tb != null && tb.isEnabled() && tb.shouldCancelToolUse(false)) {
+        if (tb != null && Uniformity.config.toolBreakToggle && tb.shouldCancelToolUse(false)) {
             cir.setReturnValue(false);
         }
     }
@@ -22,7 +22,7 @@ public class MinecraftClientMixin {
     @Inject(method = "handleBlockBreaking", at = @At("HEAD"), cancellable = true)
     public void onHandleBlockBreaking(boolean breaking, CallbackInfo ci) {
         AntiToolBreak tb = Uniformity.getModule(AntiToolBreak.class);
-        if (tb != null && tb.isEnabled() && tb.shouldCancelToolUse(false)) {
+        if (tb != null && Uniformity.config.toolBreakToggle && tb.shouldCancelToolUse(false)) {
             ci.cancel();
         }
     }
@@ -30,7 +30,7 @@ public class MinecraftClientMixin {
     @Inject(method = "doItemUse", at = @At("HEAD"), cancellable = true)
     public void onDoItemUse(CallbackInfo ci) {
         AntiToolBreak tb = Uniformity.getModule(AntiToolBreak.class);
-        if (tb != null && tb.isEnabled() && tb.shouldCancelToolUse(true)) {
+        if (tb != null && Uniformity.config.toolBreakToggle && tb.shouldCancelToolUse(true)) {
             ci.cancel();
         }
     }

@@ -25,7 +25,7 @@ public class AntiToolBreak extends Module {
     public boolean shouldCancelToolUse(boolean checkOffhand) {
         if (mc.player == null) return false;
         if (!mc.options.attackKey.isPressed() && !mc.options.useKey.isPressed()) return false;
-        if (Uniformity.antiToolBreakOverrideKeybind.isPressed()) {
+        if (Uniformity.antiToolBreakOverrideKeybind.isPressed() || !Uniformity.config.toolBreakToggle) {
             return false;
         }
 
