@@ -74,7 +74,7 @@
     "text.autoconfig.uniformity.option.horseStatsToggle": "Show Horse Stats",
     "text.autoconfig.uniformity.option.fullbrightToggle": "Fullbright",
     "text.autoconfig.uniformity.option.autoRecconnectToggle": "AutoReconnect",
-    "text.autoconfig.uniformity.option.noChatReportToggle": "Remove Secure Chat Toast",
+    "text.autoconfig.uniformity.option.noChatReportToastToggle": "Remove Secure Chat Toast",
     "text.autoconfig.uniformity.option.disableTutorialToast": "Disable Tutorial Toast",
     "text.autoconfig.uniformity.option.freecamToggle": "Freecam",
     "text.autoconfig.uniformity.option.creativeToolsToggle": "Show Creative Tools",
@@ -86,6 +86,8 @@
     "text.autoconfig.uniformity.option.lowFireToggle": "Enable Low Fire",
     "text.autoconfig.uniformity.option.autoFishToggle": "Enable Auto Fish",
     "text.autoconfig.uniformity.option.autoRefillToggle": "Enable Auto Refill",
+    "text.autoconfig.uniformity.option.disableTelemetryToggle": "Disable Telemetry",
+    "text.autoconfig.uniformity.option.mobNameplatesToggle": "Fancy Mob Nameplates",
     
     "text.autoconfig.uniformity.option.antiToolBreak": "Anti tool break options",
     "text.autoconfig.uniformity.option.antiToolBreak.duraValue": "Durability value",

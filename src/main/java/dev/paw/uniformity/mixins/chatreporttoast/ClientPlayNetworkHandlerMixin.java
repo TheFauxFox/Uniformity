@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class ClientPlayNetworkHandlerMixin {
     @Redirect(method = "onServerMetadata", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/toast/ToastManager;add(Lnet/minecraft/client/toast/Toast;)V"))
     public void onAddChatReportToast(ToastManager instance, Toast toast) {
-        if (!Uniformity.config.noChatReportToggle) {
+        if (!Uniformity.config.noChatReportToastToggle) {
             instance.add(toast);
         }
     }

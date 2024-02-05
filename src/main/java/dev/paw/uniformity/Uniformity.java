@@ -79,6 +79,7 @@ public class Uniformity implements ClientModInitializer {
         modules.add(new DisplayInfo());
         modules.add(new AutoFish());
         modules.add(new AutoRefill());
+        modules.add(new MobNameplates());
     }
 
     @Override

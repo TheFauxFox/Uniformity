@@ -13,7 +13,7 @@ import net.minecraft.entity.Entity;
 abstract class PlayerEntityRendererMixin<T extends Entity> extends EntityRenderer<T> {
 	@Override
 	protected boolean hasLabel(T entity) {
-		if(Uniformity.config.freecamToggle && entity == MinecraftClient.getInstance().player && !MinecraftClient.getInstance().options.hudHidden) {
+		if(Uniformity.config.freecamToggle && entity == MinecraftClient.getInstance().player && !MinecraftClient.getInstance().options.hudHidden && !Uniformity.config.mobNameplatesToggle) {
 			return true;
 		}
 
