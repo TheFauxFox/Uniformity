@@ -9,6 +9,7 @@ import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory.Context;
 import net.minecraft.entity.Entity;
 
+@SuppressWarnings("unused")
 @Mixin(PlayerEntityRenderer.class)
 abstract class PlayerEntityRendererMixin<T extends Entity> extends EntityRenderer<T> {
 	@Override

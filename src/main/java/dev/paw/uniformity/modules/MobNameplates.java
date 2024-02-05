@@ -30,7 +30,7 @@ public class MobNameplates extends Module {
         int light = 0xF000F0;
         float globalScale = 0.0267F;
         float textScale = 0.5F;
-        String name = livingEntity.hasCustomName() ? Formatting.ITALIC + livingEntity.getCustomName().getString() : livingEntity.getDisplayName().getString();
+        String name = livingEntity.hasCustomName() ? Formatting.ITALIC + (livingEntity.getCustomName() == null ? "Unknown Name" : livingEntity.getCustomName().getString()) : (livingEntity.getDisplayName() == null ? "Unknown Name" : livingEntity.getDisplayName().getString());
         float nameLen = mc.textRenderer.getWidth(name) * textScale;
         float halfSize = nameLen / 2.0F + 15.0F;
         float padding = 2;
