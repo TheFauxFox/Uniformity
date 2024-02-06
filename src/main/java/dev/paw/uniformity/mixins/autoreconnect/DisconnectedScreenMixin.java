@@ -34,11 +34,6 @@ public class DisconnectedScreenMixin extends Screen {
 
     @Inject(at = @At("TAIL"), method = "init()V")
     private void onInit(CallbackInfo ci) {
-        addReconnectButtons();
-    }
-
-    @Unique
-    private void addReconnectButtons() {
         ButtonWidget reconnectButton = grid.add(
                 ButtonWidget.builder(
                         Text.translatable("dev.paw.uniformity.reconnect_button"),
@@ -50,22 +45,19 @@ public class DisconnectedScreenMixin extends Screen {
         autoReconnectButton = grid.add(
                 ButtonWidget.builder(
                         Text.translatable("dev.paw.uniformity.auto_reconnect_button"),
-                        b -> pressAutoReconnect()
+                        b -> {
+                            Uniformity.config.autoRecconnectToggle =! Uniformity.config.autoRecconnectToggle;
+
+                            if (Uniformity.config.autoRecconnectToggle) {
+                                autoReconnectTimer = AutoReconnect.getWaitTicks();
+                            }
+                        }
                 ).build(),
                 grid.copyPositioner().margin(2)
         );
 
         grid.refreshPositions();
         Stream.of(reconnectButton, autoReconnectButton).forEach(this::addDrawableChild);
-
-        if (Uniformity.config.autoRecconnectToggle) {
-            autoReconnectTimer = AutoReconnect.getWaitTicks();
-        }
-    }
-
-    @Unique
-    private void pressAutoReconnect() {
-        Uniformity.config.autoRecconnectToggle =! Uniformity.config.autoRecconnectToggle;
 
         if (Uniformity.config.autoRecconnectToggle) {
             autoReconnectTimer = AutoReconnect.getWaitTicks();

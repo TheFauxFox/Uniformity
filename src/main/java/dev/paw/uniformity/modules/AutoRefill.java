@@ -43,7 +43,6 @@ public class AutoRefill extends Module {
             }
         } else if (swungHand == Hand.OFF_HAND && getOffItem() == Items.AIR && lastItemOffhand != Items.AIR) {
             if (inv.contains(lastItemOffhand.getDefaultStack())) {
-                Uniformity.logger.info("offhand refill");
                 int i = inv.getSlotWithStack(lastItemOffhand.getDefaultStack());
                 mc.interactionManager.clickSlot(mc.player.currentScreenHandler.syncId, i, GLFW.GLFW_MOUSE_BUTTON_1, SlotActionType.PICKUP, mc.player);
 

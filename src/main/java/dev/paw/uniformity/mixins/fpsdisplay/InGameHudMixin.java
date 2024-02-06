@@ -26,9 +26,6 @@ public class InGameHudMixin {
             int x = 1;
             int y = 1;
             context.getMatrices().push();
-            context.getMatrices().translate(x, y, 0);
-            context.getMatrices().scale(1, 1, 1);
-            context.getMatrices().translate(-x, -y, 0);
             context.drawTextWithShadow(client.textRenderer, client.getCurrentFps() + " FPS", x, y, Color.WHITE.asInt);
             context.getMatrices().pop();
         }
