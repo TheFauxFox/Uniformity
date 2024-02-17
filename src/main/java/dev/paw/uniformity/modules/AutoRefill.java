@@ -1,11 +1,13 @@
 package dev.paw.uniformity.modules;
 
 import dev.paw.uniformity.Uniformity;
+import dev.paw.uniformity.events.ClientPlayerEvent;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.util.Hand;
+import org.dizitart.jbus.Subscribe;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.concurrent.TimeUnit;
@@ -20,18 +22,21 @@ public class AutoRefill extends Module {
         super("AutoRefill");
     }
 
-    public void onHandSwing(Hand hand) {
-        swungHand = hand;
+    @Subscribe
+    public void onHandSwing(ClientPlayerEvent.OnSwingHand evt) {
+        swungHand = evt.hand;
     }
 
-    public void onItemUsePRE() {
-        if (mc.player == null) return;
+    @Subscribe
+    public void onItemUsePRE(ClientPlayerEvent.ItemUseEvent.PRE evt) {
+        if (mc.player == null || !isEnabled()) return;
         lastUsedSlot = getSlot();
         lastItemMain = getMainItem();
         lastItemOffhand = getOffItem();
     }
 
-    public void onItemUsePOST() {
+    @Subscribe
+    public void onItemUsePOST(ClientPlayerEvent.ItemUseEvent.POST evt) {
         if (mc.player == null || mc.interactionManager == null || !isEnabled()) return;
         PlayerInventory inv = mc.player.getInventory();
         if (swungHand == Hand.MAIN_HAND && lastUsedSlot == getSlot() && getMainItem() == Items.AIR && lastItemMain != Items.AIR) {

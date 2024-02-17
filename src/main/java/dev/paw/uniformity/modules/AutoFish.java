@@ -1,8 +1,10 @@
 package dev.paw.uniformity.modules;
 
 import dev.paw.uniformity.Uniformity;
+import dev.paw.uniformity.events.CaughtFishEvent;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
+import org.dizitart.jbus.Subscribe;
 
 public class AutoFish extends KeyboundModule {
     public AutoFish() {
@@ -17,6 +19,13 @@ public class AutoFish extends KeyboundModule {
     @Override
     public void setEnabled(boolean value) {
         Uniformity.config.autoFishToggle = value;
+    }
+
+    @Subscribe
+    public void onCaughtFish(CaughtFishEvent evt) {
+        if (isEnabled() && evt.fisher == mc.player) {
+            doAutoFish();
+        }
     }
 
     public void doAutoFish() {

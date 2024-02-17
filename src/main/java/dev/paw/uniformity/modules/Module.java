@@ -1,6 +1,8 @@
 package dev.paw.uniformity.modules;
 
+import dev.paw.uniformity.events.ClientTickEvent;
 import net.minecraft.client.MinecraftClient;
+import org.dizitart.jbus.Subscribe;
 
 public abstract class Module {
     protected MinecraftClient mc = MinecraftClient.getInstance();
@@ -18,5 +20,6 @@ public abstract class Module {
         return this.isEnabled();
     }
 
-    public void onClientTick() {}
+    @Subscribe
+    public void onClientTick(ClientTickEvent evt) {}
 }
