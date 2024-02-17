@@ -24,12 +24,12 @@ class ErrorHandler {
 
         List<ListenerMethod> errorSubscribers = listenersRegistry.getSubscribers(exceptionEvent);
         if (errorSubscribers != null && !errorSubscribers.isEmpty()) {
-            logger.debug("Total error handler found for error " + error + " is = " + errorSubscribers.size());
-            logger.info("Dispatching error event " + exceptionEvent);
+            logger.debug("Total error handler found for error {} is = {}", error, errorSubscribers.size());
+            logger.info("Dispatching error event {}", exceptionEvent);
             DefaultHandlerChain errorHandlerChain = new DefaultHandlerChain(errorSubscribers);
             eventDispatcher.dispatch(exceptionEvent, errorHandlerChain);
         } else {
-            logger.error("No error handler found for " + error);
+            logger.error("No error handler found for {}", error.toString());
         }
     }
 }

@@ -24,16 +24,16 @@ class ListenersRegistry {
     void register(Object listener) {
         synchronized (lock) {
             if (subscriberCache.contains(listener)) {
-                logger.error(listener + " has already been registered.");
+                logger.error("{} has already been registered.", listener);
                 throw new JBusException(listener + " has already been registered.");
             }
             subscriberCache.add(listener);
-            logger.debug(listener + " added to the subscriber cache.");
+            logger.debug("{} added to the subscriber cache.", listener);
         }
 
         List<ListenerMethod> subscribedMethods = findSubscribedMethods(listener.getClass());
         if (subscribedMethods.isEmpty()) {
-            logger.error(listener + " does not have any method marked with @Subscribe.");
+            logger.error("{} does not have any method marked with @Subscribe.", listener);
             throw new JBusException(listener + " does not have any method marked with @Subscribe.");
         }
 
@@ -46,15 +46,15 @@ class ListenersRegistry {
 
                 if (!listenerMethods.contains(listenerMethod)) {
                     listenerMethods.add(listenerMethod);
-                    logger.debug(listenerMethod + " has been registered.");
+                    logger.debug("{} has been registered.", listenerMethod);
                 } else {
-                    logger.debug(listenerMethod + " has already been registered.");
+                    logger.debug("{} has already been registered.", listenerMethod);
                 }
             } else {
                 List<ListenerMethod> listenerMethods = new CopyOnWriteArrayList<>();
                 listenerMethods.add(listenerMethod);
                 registry.put(listenerMethod.eventType, listenerMethods);
-                logger.debug(listenerMethod + " has been registered.");
+                logger.debug("{} has been registered.", listenerMethod);
             }
         }
     }
@@ -65,7 +65,7 @@ class ListenersRegistry {
             for (Object object : subscriberCache) {
                 if (object.equals(listener)) {
                     if (subscriberCache.remove(listener)) {
-                        logger.debug(listener + " removed from the subscriber cache.");
+                        logger.debug("{} removed from the subscriber cache.", listener);
                     }
                     break;
                 }
@@ -90,7 +90,7 @@ class ListenersRegistry {
             for (ListenerMethod listenerMethod : subscribedMethods) {
                 if (listenerMethod.target.equals(listener)) {
                     if (subscribedMethods.remove(listenerMethod)) {
-                        logger.debug(listenerMethod + " has been un-registered.");
+                        logger.debug("{} has been un-registered.", listenerMethod);
                     }
                 }
             }

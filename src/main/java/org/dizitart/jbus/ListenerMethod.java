@@ -22,14 +22,11 @@ class ListenerMethod {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        ListenerMethod other = (ListenerMethod) obj;
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
 
+        ListenerMethod other = (ListenerMethod) obj;
         return other.method.getName().equals(method.getName())
                 && other.method.getModifiers() != Modifier.PRIVATE
                 && method.getModifiers() != Modifier.PRIVATE
@@ -52,13 +49,6 @@ class ListenerMethod {
 
     @Override
     public String toString() {
-        return "[" +
-                "method = " +
-                method.getName() +
-                ", target = " +
-                (target) +
-                ", event = " +
-                eventType.getName() +
-                "]";
+        return String.format("[method = %s, target = %s, event = %s]", method.getName(), target, eventType.getName());
     }
 }

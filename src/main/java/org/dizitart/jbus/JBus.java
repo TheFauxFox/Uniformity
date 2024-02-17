@@ -1,5 +1,6 @@
 package org.dizitart.jbus;
 
+import dev.paw.uniformity.events.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +30,7 @@ public class JBus {
         listenersRegistry.register(listener);
     }
 
-    public void post(Object event) {
+    public <T extends Event> T post(T event) {
         if (event == null) {
             logger.error("Null event posted.");
             throw new NullPointerException("Null event can not be posted.");
@@ -38,11 +39,12 @@ public class JBus {
         List<ListenerMethod> subscribers = listenersRegistry.getSubscribers(event);
         if (subscribers != null && !subscribers.isEmpty()) {
             if (logger.isDebugEnabled()) {
-                logger.debug("Total subscribers found for event " + event + " is = " + subscribers.size());
-                logger.debug("Dispatching event " + event);
+                logger.debug("Total subscribers found for event {} is = {}", event, subscribers.size());
+                logger.debug("Dispatching event {}", event);
             }
             DefaultHandlerChain handlerChain = new DefaultHandlerChain(subscribers);
             eventDispatcher.dispatch(event, handlerChain);
         }
+        return event;
     }
 }

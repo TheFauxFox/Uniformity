@@ -18,7 +18,7 @@ class EventDispatcher {
     void dispatch(Object event, DefaultHandlerChain handlerChain) {
         for (ListenerMethod listenerMethod : handlerChain) {
             if (!handlerChain.interrupt) {
-                logger.debug("Executing listener " + listenerMethod);
+                logger.debug("Executing listener {}",listenerMethod);
                 dispatchSingle(event, listenerMethod);
             }
         }
@@ -29,10 +29,10 @@ class EventDispatcher {
             listenerMethod.method.invoke(listenerMethod.target, event);
         } catch (Exception e) {
             if (e.getCause() != null) {
-                logger.error("Error occurred while invoking " + listenerMethod, e.getCause());
+                logger.error("Error occurred while invoking {}, {}", listenerMethod, e.getCause());
                 errorHandler.handle(event, listenerMethod, e.getCause());
             } else {
-                logger.error("Error occurred while invoking " + listenerMethod, e);
+                logger.error("Error occurred while invoking {}, {}", listenerMethod, e);
                 errorHandler.handle(event, listenerMethod, e);
             }
         }
