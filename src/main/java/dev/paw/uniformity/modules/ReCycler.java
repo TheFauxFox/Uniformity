@@ -1,6 +1,12 @@
 package dev.paw.uniformity.modules;
 
 import dev.paw.uniformity.Uniformity;
+import dev.paw.uniformity.events.ClientTickEvent;
+import dev.paw.uniformity.events.MouseButtonEvent;
+import dev.paw.uniformity.events.PacketEvent;
+import dev.paw.uniformity.events.Render3dEvent;
+import dev.paw.uniformity.utils.Color;
+import dev.paw.uniformity.utils.Render3D;
 import dev.paw.uniformity.utils.Rotation;
 import dev.paw.uniformity.utils.Timer;
 import net.minecraft.block.AirBlock;
@@ -16,9 +22,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.network.packet.c2s.play.CloseHandledScreenC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
+import net.minecraft.network.packet.s2c.play.CloseScreenS2CPacket;
+import net.minecraft.network.packet.s2c.play.OpenScreenS2CPacket;
+import net.minecraft.network.packet.s2c.play.SetTradeOffersS2CPacket;
 import net.minecraft.registry.Registries;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -27,6 +38,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShapes;
@@ -34,9 +46,11 @@ import net.minecraft.village.TradeOffer;
 import net.minecraft.village.TradeOfferList;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.RaycastContext;
+import org.dizitart.jbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ReCycler extends KeyboundModule {
     public TradeOfferList lastOffers = null;
@@ -70,6 +84,60 @@ public class ReCycler extends KeyboundModule {
         Uniformity.sendPrefixedMessage(Text.translatable("dev.paw.uniformity.recycler.prefix").append(Text.translatable(key, args)));
     }
 
+    @Subscribe
+    public void onSendPacket(PacketEvent.OnSend evt) {
+        if (!isEnabled()) return;
+        if (evt.getPacket() instanceof  PlayerInteractEntityC2SPacket && mc.targetedEntity instanceof VillagerEntity ent && ent.getVillagerData().getProfession().equals(VillagerProfession.LIBRARIAN) && mc.options.sneakKey.isPressed()) {
+            villager = ent;
+            chatMsg("dev.paw.uniformity.recycler.setVillagerMessage");
+        }
+    }
+
+    @Subscribe
+    public void onRecvPacket(PacketEvent.OnRecieved evt) {
+        if (!isEnabled()) return;
+        if ((evt.getPacket() instanceof CloseScreenS2CPacket || evt.getPacket() instanceof CloseHandledScreenC2SPacket) && stepping) {
+            evt.cancel();
+        }
+        if (evt.getPacket() instanceof OpenScreenS2CPacket p && (stepping || mc.options.sneakKey.isPressed())) {
+            if (Objects.equals(p.getScreenHandlerType(), ScreenHandlerType.MERCHANT)) {
+                evt.cancel();
+            }
+        }
+        if (evt.getPacket() instanceof SetTradeOffersS2CPacket p) {
+            lastOffers = p.getOffers();
+        }
+    }
+
+    @Subscribe
+    public void onMouseButton(MouseButtonEvent evt) {
+        if (isEnabled() && evt.button == MouseButtonEvent.Button.Right) {
+            useButton = true;
+        }
+    }
+
+    @Subscribe
+    public void onRender3d(Render3dEvent evt) {
+        if (mc.player == null || mc.world == null || !isEnabled()) return;
+        Render3D.begin(evt.matrices);
+
+        if (villager != null) {
+            evt.matrices.push();
+            Render3D.drawOutlinedBox(villager.getBoundingBox(), evt.matrices, Color.rgba(200, 200, 200, 128));
+            Render3D.drawSolidBox(villager.getBoundingBox(), evt.matrices, Color.rgba(85,85,85, 70));
+            evt.matrices.pop();
+        }
+
+        if (lecternPos != null) {
+            evt.matrices.push();
+            Render3D.drawOutlinedBox(new Box(lecternPos), evt.matrices, Color.rgba(200, 200, 200, 128));
+            Render3D.drawSolidBox(new Box(lecternPos), evt.matrices, Color.rgba(85,85,85, 70));
+            evt.matrices.pop();
+        }
+
+        Render3D.end(evt.matrices);
+    }
+
     public void onEnable() {
         villager = null;
         villagerInfo = null;
@@ -100,12 +168,12 @@ public class ReCycler extends KeyboundModule {
     }
 
     @Override
-    public void onClientTick() {
+    public void onClientTick(ClientTickEvent evt) {
         if (mc.player == null || mc.world == null || mc.interactionManager == null || !this.isEnabled()) return;
         if (villager != null && (villager.isDead() || villager.getHealth() == 0)) {
             villager = null;
         }
-        while (useButton && mc.options.sneakKey.wasPressed()) {
+        while (useButton && mc.options.sneakKey.isPressed()) {
             useButton = false;
             if (mc.crosshairTarget != null && mc.crosshairTarget.getType() == HitResult.Type.BLOCK) {
                 Vec3d tPos = mc.crosshairTarget.getPos();

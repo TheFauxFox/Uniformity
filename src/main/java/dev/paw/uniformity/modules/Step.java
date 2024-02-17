@@ -1,6 +1,7 @@
 package dev.paw.uniformity.modules;
 
 import dev.paw.uniformity.Uniformity;
+import dev.paw.uniformity.events.ClientTickEvent;
 import org.lwjgl.glfw.GLFW;
 
 public class Step extends KeyboundModule {
@@ -19,7 +20,7 @@ public class Step extends KeyboundModule {
     }
 
     @Override
-    public void onClientTick() {
+    public void onClientTick(ClientTickEvent evt) {
         if (mc.player == null) return;
         if (this.isEnabled()) {
             if (mc.player.isSneaking()) {

@@ -1,10 +1,10 @@
 package dev.paw.uniformity.modules;
 
 import dev.paw.uniformity.Uniformity;
+import dev.paw.uniformity.events.RenderPingIconEvent;
 import dev.paw.uniformity.utils.Color;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.network.PlayerListEntry;
+import org.dizitart.jbus.Subscribe;
 
 public class NumericPing extends Module {
     public NumericPing() {
@@ -18,12 +18,19 @@ public class NumericPing extends Module {
 
     @Override
     public void setEnabled(boolean value) {
-
+        Uniformity.config.numericPingToggle = value;
     }
 
-    public void renderPing(int x, int y, int width, DrawContext context, PlayerListEntry entry) {
+    @Subscribe
+    public void renderPing(RenderPingIconEvent evt) {
+        if (!isEnabled()) {
+            RenderPingIconEvent.WidthOverride = 0;
+            return;
+        }
+
+        RenderPingIconEvent.WidthOverride = Uniformity.config.numericPing.pingWidthOverride;
         Color color;
-        int latency = entry.getLatency();
+        int latency = evt.entry.getLatency();
 
         if (latency < 0) {
             color = Color.BLACK;
@@ -41,6 +48,6 @@ public class NumericPing extends Module {
 
         String ping = latency + "ms";
         int pingWidth = MinecraftClient.getInstance().textRenderer.getWidth(ping);
-        context.drawText(MinecraftClient.getInstance().textRenderer, latency + "ms", x + width - pingWidth, y, color.asInt, true);
+        evt.ctx.drawText(MinecraftClient.getInstance().textRenderer, latency + "ms", evt.x + evt.width - pingWidth, evt.y, color.asInt, true);
     }
 }

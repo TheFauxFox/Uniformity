@@ -20,7 +20,7 @@ public class ModConfig implements ConfigData {
     public boolean horseStatsToggle = true;
     public boolean fullbrightToggle = false;
     public boolean autoRecconnectToggle = false;
-    public boolean noChatReportToggle = true;
+    public boolean noChatReportToastToggle = true;
     public boolean disableTutorialToast = true;
     /* FREECAM MUST ALWAYS BE DISABLED */
     @ConfigEntry.Gui.Excluded
@@ -33,6 +33,10 @@ public class ModConfig implements ConfigData {
     /* RECYCLER MUST ALWAYS BE DISABLED */
     @ConfigEntry.Gui.Excluded
     public boolean recyclerToggle = false;
+    public boolean autoFishToggle = false;
+    public boolean autoRefillToggle = true;
+    public boolean disableTelemetryToggle = true;
+    public boolean mobNameplatesToggle = true;
 
     @ConfigEntry.Gui.CollapsibleObject
     public NumericPing numericPing = new NumericPing();
@@ -54,6 +58,9 @@ public class ModConfig implements ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject
     public DisplayInfo displayInfo = new DisplayInfo();
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public AutoRefill autoRefill = new AutoRefill();
 
     public static class AntiToolBreak {
         public int duraValue = 5;
@@ -112,5 +119,9 @@ public class ModConfig implements ConfigData {
         public boolean lightLevel = true;
         public boolean blockLevel = true;
         public boolean showRecycler = true;
+    }
+
+    public static class AutoRefill {
+        public int refillMS = 10;
     }
 }

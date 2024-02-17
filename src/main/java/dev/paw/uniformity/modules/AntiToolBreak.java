@@ -1,9 +1,11 @@
 package dev.paw.uniformity.modules;
 
 import dev.paw.uniformity.Uniformity;
+import dev.paw.uniformity.events.ClientPlayerEvent;
 import net.minecraft.item.*;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import org.dizitart.jbus.Subscribe;
 
 import java.util.ArrayList;
 
@@ -22,10 +24,31 @@ public class AntiToolBreak extends Module {
         Uniformity.config.toolBreakToggle = value;
     }
 
+    @Subscribe
+    public void onDoAttack(ClientPlayerEvent.OnDoAttack.PRE evt) {
+        if (isEnabled() && shouldCancelToolUse(false)) {
+            evt.cancel();
+        }
+    }
+
+    @Subscribe
+    public void onHandleBlockBreak(ClientPlayerEvent.OnHandleBlockBreaking evt) {
+        if (isEnabled() && shouldCancelToolUse(false)) {
+            evt.cancel();
+        }
+    }
+
+    @Subscribe
+    public void onItemUse(ClientPlayerEvent.ItemUseEvent.PRE evt) {
+        if (isEnabled() && shouldCancelToolUse(true)) {
+            evt.cancel();
+        }
+    }
+
     public boolean shouldCancelToolUse(boolean checkOffhand) {
         if (mc.player == null) return false;
         if (!mc.options.attackKey.isPressed() && !mc.options.useKey.isPressed()) return false;
-        if (Uniformity.antiToolBreakOverrideKeybind.isPressed()) {
+        if (Uniformity.antiToolBreakOverrideKeybind.isPressed() || !Uniformity.config.toolBreakToggle) {
             return false;
         }
 

@@ -38,6 +38,7 @@
     "dev.paw.uniformity.keybind.antitoolbreakOverride": "Override Anti Tool Break",
     "dev.paw.uniformity.keybind.entityoutline": "Toggle Entity Outline",
     "dev.paw.uniformity.keybind.recycler": "Toggle ReCycler",
+    "dev.paw.uniformity.keybind.autofish": "Toggle AutoFish",
     
     "dev.paw.uniformity.fpsdisplay.fpsTitle": "%d FPS",
     "dev.paw.uniformity.displayInfo.speedDisplay": "Speed: %.2f b/s",
@@ -73,7 +74,7 @@
     "text.autoconfig.uniformity.option.horseStatsToggle": "Show Horse Stats",
     "text.autoconfig.uniformity.option.fullbrightToggle": "Fullbright",
     "text.autoconfig.uniformity.option.autoRecconnectToggle": "AutoReconnect",
-    "text.autoconfig.uniformity.option.noChatReportToggle": "Remove Secure Chat Toast",
+    "text.autoconfig.uniformity.option.noChatReportToastToggle": "Remove Secure Chat Toast",
     "text.autoconfig.uniformity.option.disableTutorialToast": "Disable Tutorial Toast",
     "text.autoconfig.uniformity.option.freecamToggle": "Freecam",
     "text.autoconfig.uniformity.option.creativeToolsToggle": "Show Creative Tools",
@@ -83,6 +84,10 @@
     "text.autoconfig.uniformity.option.noFogToggle": "Disable Fog",
     "text.autoconfig.uniformity.option.noHurtAngleToggle": "Disable Damage Tilt",
     "text.autoconfig.uniformity.option.lowFireToggle": "Enable Low Fire",
+    "text.autoconfig.uniformity.option.autoFishToggle": "Enable Auto Fish",
+    "text.autoconfig.uniformity.option.autoRefillToggle": "Enable Auto Refill",
+    "text.autoconfig.uniformity.option.disableTelemetryToggle": "Disable Telemetry",
+    "text.autoconfig.uniformity.option.mobNameplatesToggle": "Fancy Mob Nameplates",
     
     "text.autoconfig.uniformity.option.antiToolBreak": "Anti tool break options",
     "text.autoconfig.uniformity.option.antiToolBreak.duraValue": "Durability value",
@@ -112,7 +117,7 @@
     "text.autoconfig.uniformity.option.freecam.highlightPlayer": "Show player outline",
     "text.autoconfig.uniformity.option.freecam.toggleOnDamage": "Disable freecam on damage",
     
-    "text.autoconfig.uniformity.option.autoReconnect": "AutoReconnect",
+    "text.autoconfig.uniformity.option.autoReconnect": "AutoReconnect options",
     "text.autoconfig.uniformity.option.autoReconnect.timeJitter": "Jitter time on reconnect",
     "text.autoconfig.uniformity.option.autoReconnect.reconnectSeconds": "Reconnect delay",
     "text.autoconfig.uniformity.option.autoReconnect.timeJitterSeconds": "Random time jitter",
@@ -134,5 +139,8 @@
     "text.autoconfig.uniformity.option.displayInfo.biome": "Show biome",
     "text.autoconfig.uniformity.option.displayInfo.lightLevel": "Show sky light level",
     "text.autoconfig.uniformity.option.displayInfo.blockLevel": "Show block light level",
-    "text.autoconfig.uniformity.option.displayInfo.showRecycler": "Show ReCycler info"
+    "text.autoconfig.uniformity.option.displayInfo.showRecycler": "Show ReCycler info",
+    
+    "text.autoconfig.uniformity.option.autoRefill": "AutoRefill options",
+    "text.autoconfig.uniformity.option.autoRefill.refillMS": "Refill delay in milliseconds"
 }
