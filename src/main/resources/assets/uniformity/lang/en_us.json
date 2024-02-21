@@ -39,6 +39,8 @@
     "dev.paw.uniformity.keybind.entityoutline": "Toggle Entity Outline",
     "dev.paw.uniformity.keybind.recycler": "Toggle ReCycler",
     "dev.paw.uniformity.keybind.autofish": "Toggle AutoFish",
+    "dev.paw.uniformity.keybind.fpsdisplay": "Toggle FPS Display",
+    "dev.paw.uniformity.keybind.nofog": "Toggle No Fog",
     
     "dev.paw.uniformity.fpsdisplay.fpsTitle": "%d FPS",
     "dev.paw.uniformity.displayInfo.speedDisplay": "Speed: %.2f b/s",
