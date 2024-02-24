@@ -36,7 +36,7 @@ public class DisplayInfo extends Module {
 
     @Subscribe
     public void render(Render2dEvent evt) {
-        if (isEnabled() && mc.player != null && mc.world != null) {
+        if (isEnabled() && mc.player != null && mc.world != null && !evt.hideHud()) {
             int x = 1;
             int y = Uniformity.config.fpsToggle ? 12 : 1;
             evt.ctx.getMatrices().push();
