@@ -31,7 +31,7 @@ public class DirectionDisplay extends KeyboundModule {
         float facingPerc = MathHelper.wrapDegrees(MathHelper.lerp(evt.tickDelta, mc.player.lastRenderYaw, mc.player.renderYaw) + 180) / 360;
         float facing = 256 * facingPerc;
 
-        evt.ctx.fill(width.x1(), padTop, width.x2(), padTop + height, backgroundColor.asInt);
+        evt.ctx.fill(width.x1(), padTop, width.x2(), (padTop * 2) + height, backgroundColor.asInt);
         evt.ctx.fill(reticle.x1(), 10, reticle.x1() + 1, height + padTop, reticleColor.asInt);
         textColor.setShader();
         evt.ctx.drawTexture(new Identifier("uniformity:compass.png"), width.x1(), padTop + (padTop / 2), 132 + facing - ((float) w / widPercent) - width.getWidth() / 2F, 0, width.getWidth(), 12, 256, 12);
