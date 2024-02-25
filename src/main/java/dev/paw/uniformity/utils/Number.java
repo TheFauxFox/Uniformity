@@ -1,6 +1,8 @@
 package dev.paw.uniformity.utils;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 @SuppressWarnings("unused")
 public class Number {
@@ -10,6 +12,10 @@ public class Number {
 
     public static double round(double val, int places) {
         return Math.round(val * Math.pow(10, places)) / Math.pow(10, places);
+    }
+
+    public static Vec3d posToVec(BlockPos pos) {
+        return new Vec3d(pos.getX(), pos.getY(), pos.getZ());
     }
 
     public static class Centered {

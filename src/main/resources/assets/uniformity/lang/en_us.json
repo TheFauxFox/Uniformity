@@ -42,6 +42,7 @@
     "dev.paw.uniformity.keybind.fpsdisplay": "Toggle FPS Display",
     "dev.paw.uniformity.keybind.nofog": "Toggle No Fog",
     "dev.paw.uniformity.keybind.directiondisplay": "Toggle HUD Compass",
+    "dev.paw.uniformity.keybind.measuringTape": "Toggle Measuring Tape",
     
     "dev.paw.uniformity.fpsdisplay.fpsTitle": "%d FPS",
     "dev.paw.uniformity.displayInfo.speedDisplay": "Speed: %.2f b/s",
@@ -92,6 +93,7 @@
     "text.autoconfig.uniformity.option.disableTelemetryToggle": "Disable Telemetry",
     "text.autoconfig.uniformity.option.mobNameplatesToggle": "Fancy Mob Nameplates",
     "text.autoconfig.uniformity.option.directionDisplayToggle": "HUD Compass",
+    "text.autoconfig.uniformity.option.measuringTapeToggle": "Measuring Tape",
     
     "text.autoconfig.uniformity.option.antiToolBreak": "Anti tool break options",
     "text.autoconfig.uniformity.option.antiToolBreak.duraValue": "Durability value",
@@ -148,11 +150,14 @@
     "text.autoconfig.uniformity.option.autoRefill": "AutoRefill options",
     "text.autoconfig.uniformity.option.autoRefill.refillMS": "Refill delay in milliseconds",
     
-    "text.autoconfig.uniformity.option.directionDisplay": "HUD Compass Options",
+    "text.autoconfig.uniformity.option.directionDisplay": "HUD compass options",
     "text.autoconfig.uniformity.option.directionDisplay.backgroundHex": "Background hex",
     "text.autoconfig.uniformity.option.directionDisplay.backgroundAlpha": "Background alpha",
     "text.autoconfig.uniformity.option.directionDisplay.textColorHex": "Text color hex",
     "text.autoconfig.uniformity.option.directionDisplay.textColorAlpha": "Text color alpha",
     "text.autoconfig.uniformity.option.directionDisplay.reticleHex": "Reticle hex",
-    "text.autoconfig.uniformity.option.directionDisplay.reticleAlpha": "Reticle alpha"
+    "text.autoconfig.uniformity.option.directionDisplay.reticleAlpha": "Reticle alpha",
+    
+    "text.autoconfig.uniformity.option.measuringTape": "Measuring tape options",
+    "text.autoconfig.uniformity.option.measuringTape.measuringItem": "Item to use for measuring"
 }

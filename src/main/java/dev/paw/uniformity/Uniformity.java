@@ -93,6 +93,7 @@ public class Uniformity implements ClientModInitializer {
         modules.add(new Fullbright());
         modules.add(new HorseStats());
         modules.add(new LowFire());
+        modules.add(new MeasuringTape());
         modules.add(new MobNameplates());
         modules.add(new NoChatReportToast());
         modules.add(new NoFog());

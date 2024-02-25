@@ -38,6 +38,7 @@ public class ModConfig implements ConfigData {
     public boolean disableTelemetryToggle = true;
     public boolean mobNameplatesToggle = true;
     public boolean directionDisplayToggle = false;
+    public boolean measuringTapeToggle = false;
 
     @ConfigEntry.Gui.CollapsibleObject
     public NumericPing numericPing = new NumericPing();
@@ -65,6 +66,9 @@ public class ModConfig implements ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject
     public DirectionDisplay directionDisplay = new DirectionDisplay();
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public MeasuringTape measuringTape = new MeasuringTape();
 
     public static class AntiToolBreak {
         public int duraValue = 5;
@@ -136,5 +140,9 @@ public class ModConfig implements ConfigData {
         public int textColorAlpha = 255;
         public String reticleHex = "D21414";
         public int reticleAlpha = 255;
+    }
+
+    public static class MeasuringTape {
+        public String measuringItem = "minecraft:stick";
     }
 }
