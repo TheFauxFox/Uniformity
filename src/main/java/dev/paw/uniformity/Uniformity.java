@@ -68,6 +68,8 @@ public class Uniformity implements ClientModInitializer {
                     configHolder.save();
                 }, 20, TimeUnit.MILLISECONDS);
                 wasKeybindSave = false;
+            } else {
+                config = cfg;
             }
             return ActionResult.PASS;
         });
@@ -82,6 +84,7 @@ public class Uniformity implements ClientModInitializer {
         modules.add(new BeeInfo());
         modules.add(new CreativeTools());
         modules.add(new DarkLoadingScreen());
+        modules.add(new DirectionDisplay());
         modules.add(new DisplayInfo());
         modules.add(new EntityOutline());
         modules.add(new ExtendChatHistory());

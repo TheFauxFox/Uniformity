@@ -37,6 +37,7 @@ public class ModConfig implements ConfigData {
     public boolean autoRefillToggle = true;
     public boolean disableTelemetryToggle = true;
     public boolean mobNameplatesToggle = true;
+    public boolean directionDisplayToggle = false;
 
     @ConfigEntry.Gui.CollapsibleObject
     public NumericPing numericPing = new NumericPing();
@@ -61,6 +62,9 @@ public class ModConfig implements ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject
     public AutoRefill autoRefill = new AutoRefill();
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public DirectionDisplay directionDisplay = new DirectionDisplay();
 
     public static class AntiToolBreak {
         public int duraValue = 5;
@@ -123,5 +127,14 @@ public class ModConfig implements ConfigData {
 
     public static class AutoRefill {
         public int refillMS = 10;
+    }
+
+    public static class DirectionDisplay {
+        public String backgroundHex = "000000";
+        public int backgroundAlpha = 100;
+        public String textColorHex = "FFFFFF";
+        public int textColorAlpha = 255;
+        public String reticleHex = "D21414";
+        public int reticleAlpha = 255;
     }
 }

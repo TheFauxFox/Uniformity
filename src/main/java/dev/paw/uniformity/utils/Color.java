@@ -1,5 +1,8 @@
 package dev.paw.uniformity.utils;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.MinecraftClient;
+
 @SuppressWarnings("unused")
 public class Color {
     public static Color DARK_RED = Color.rgb(170, 0, 0);
@@ -36,6 +39,10 @@ public class Color {
         this.asHex = Integer.toHexString(asInt).substring(2);
     }
 
+    public Color withAlpha(int alpha) {
+        return new Color(this.red, this.green, this.blue, alpha);
+    }
+
     public static Color rgb(int r, int g, int b) {
         return Color.rgba(r, g, b, 255);
     }
@@ -62,5 +69,13 @@ public class Color {
                 Integer.parseInt(sg, 16),
                 Integer.parseInt(sb, 16)
         );
+    }
+
+    public void setShader() {
+        RenderSystem.setShaderColor(this.floatRed, this.floatGreen, this.floatBlue, this.floatAlpha);
+    }
+
+    public static void resetShader() {
+        RenderSystem.setShaderColor(1, 1, 1, 1);
     }
 }
