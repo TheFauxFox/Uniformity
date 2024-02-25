@@ -1,7 +1,6 @@
 package dev.paw.uniformity.utils;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.MinecraftClient;
 
 @SuppressWarnings("unused")
 public class Color {

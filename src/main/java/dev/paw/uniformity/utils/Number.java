@@ -2,6 +2,7 @@ package dev.paw.uniformity.utils;
 
 import net.minecraft.client.MinecraftClient;
 
+@SuppressWarnings("unused")
 public class Number {
     public static int randInt(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
