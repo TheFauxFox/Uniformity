@@ -42,7 +42,7 @@
     "dev.paw.uniformity.keybind.fpsdisplay": "Toggle FPS Display",
     "dev.paw.uniformity.keybind.nofog": "Toggle No Fog",
     "dev.paw.uniformity.keybind.directiondisplay": "Toggle HUD Compass",
-    "dev.paw.uniformity.keybind.measuringTape": "Toggle Measuring Tape",
+    "dev.paw.uniformity.keybind.measuringtape": "Toggle Measuring Tape",
     
     "dev.paw.uniformity.fpsdisplay.fpsTitle": "%d FPS",
     "dev.paw.uniformity.displayInfo.speedDisplay": "Speed: %.2f b/s",

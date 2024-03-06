@@ -31,7 +31,7 @@ public class MobNameplates extends Module {
         if (mc.player == null || mc.world == null || !isEnabled()) return;
         if (!(evt.entity instanceof LivingEntity livingEntity) || !mc.player.canSee(livingEntity) || mc.player.distanceTo(livingEntity) >= 4096) return;
         if (livingEntity == mc.player && !Uniformity.config.freecamToggle) return;
-        if (livingEntity.hasPassengers()) return;
+        if (livingEntity.hasPassengers() || livingEntity.isInvisibleTo(mc.player)) return;
         if (mc.options.hudHidden) return;
 
         String name = livingEntity.hasCustomName() ? Formatting.ITALIC + (livingEntity.getCustomName() == null ? "Unknown Name" : livingEntity.getCustomName().getString()) : (livingEntity.getDisplayName() == null ? "Unknown Name" : livingEntity.getDisplayName().getString());

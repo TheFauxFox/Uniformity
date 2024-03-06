@@ -28,6 +28,7 @@ public class NumericPing extends Module {
             return;
         }
 
+        evt.cancel();
         RenderPingIconEvent.WidthOverride = Uniformity.config.numericPing.pingWidthOverride;
         Color color;
         int latency = evt.entry.getLatency();
