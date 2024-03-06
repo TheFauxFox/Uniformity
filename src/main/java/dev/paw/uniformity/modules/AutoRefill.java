@@ -36,6 +36,20 @@ public class AutoRefill extends Module {
     }
 
     @Subscribe
+    public void onItemAttackPRE(ClientPlayerEvent.OnHandleBlockBreaking evt) {
+        if (mc.player == null || mc.interactionManager == null || !isEnabled()) return;
+        PlayerInventory inv = mc.player.getInventory();
+        if (lastUsedSlot == getSlot() && getMainItem() == Items.AIR && lastItemMain != Items.AIR) {
+            if (inv.contains(lastItemMain.getDefaultStack())) {
+                int i = inv.getSlotWithStack(lastItemMain.getDefaultStack());
+                mc.interactionManager.clickSlot(mc.player.currentScreenHandler.syncId, i, GLFW.GLFW_MOUSE_BUTTON_1, SlotActionType.PICKUP, mc.player);
+
+                Uniformity.scheduler.schedule(() -> mc.interactionManager.clickSlot(mc.player.currentScreenHandler.syncId, mc.player.getInventory().selectedSlot + PlayerInventory.MAIN_SIZE, GLFW.GLFW_MOUSE_BUTTON_1, SlotActionType.PICKUP, mc.player), Uniformity.config.autoRefill.refillMS, TimeUnit.MILLISECONDS);
+            }
+        }
+    }
+
+    @Subscribe
     public void onItemUsePOST(ClientPlayerEvent.ItemUseEvent.POST evt) {
         if (mc.player == null || mc.interactionManager == null || !isEnabled()) return;
         PlayerInventory inv = mc.player.getInventory();
