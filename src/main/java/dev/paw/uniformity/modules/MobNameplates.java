@@ -7,6 +7,7 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
 import org.dizitart.jbus.Subscribe;
@@ -31,7 +32,7 @@ public class MobNameplates extends Module {
         if (mc.player == null || mc.world == null || !isEnabled()) return;
         if (!(evt.entity instanceof LivingEntity livingEntity) || !mc.player.canSee(livingEntity) || mc.player.distanceTo(livingEntity) >= 4096) return;
         if (livingEntity == mc.player && !Uniformity.config.freecamToggle) return;
-        if (livingEntity.hasPassengers() || livingEntity.isInvisibleTo(mc.player)) return;
+        if (livingEntity.hasPassengers() || livingEntity.isInvisible() || evt.entity instanceof ArmorStandEntity) return;
         if (mc.options.hudHidden) return;
 
         String name = livingEntity.hasCustomName() ? Formatting.ITALIC + (livingEntity.getCustomName() == null ? "Unknown Name" : livingEntity.getCustomName().getString()) : (livingEntity.getDisplayName() == null ? "Unknown Name" : livingEntity.getDisplayName().getString());
