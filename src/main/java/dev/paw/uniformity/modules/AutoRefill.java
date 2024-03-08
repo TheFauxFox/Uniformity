@@ -37,7 +37,7 @@ public class AutoRefill extends Module {
 
     @Subscribe
     public void onItemAttackPRE(ClientPlayerEvent.OnHandleBlockBreaking evt) {
-        if (mc.player == null || mc.interactionManager == null || !isEnabled()) return;
+        if (mc.player == null || mc.interactionManager == null || !isEnabled() || !evt.isBreaking) return;
         PlayerInventory inv = mc.player.getInventory();
         if (lastUsedSlot == getSlot() && getMainItem() == Items.AIR && lastItemMain != Items.AIR) {
             if (inv.contains(lastItemMain.getDefaultStack())) {
