@@ -10,6 +10,8 @@ public class MouseButtonEvent extends CancellableEvent {
     public enum Button {
         Left,
         Right,
-        Middle
+        Middle,
+        Forward,
+        Back
     }
 }
