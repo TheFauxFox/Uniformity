@@ -47,7 +47,7 @@ public class Rotation {
 
         @Override
         public boolean equals(Object obj) {
-            return obj instanceof Rotation && ((Rotation) obj).yaw == yaw && ((Rotation) obj).pitch == pitch;
+            return obj instanceof Rotations && ((Rotations) obj).yaw == yaw && ((Rotations) obj).pitch == pitch;
         }
     }
 }
