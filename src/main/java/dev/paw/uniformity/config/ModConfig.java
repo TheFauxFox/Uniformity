@@ -39,6 +39,7 @@ public class ModConfig implements ConfigData {
     public boolean mobNameplatesToggle = true;
     public boolean directionDisplayToggle = false;
     public boolean measuringTapeToggle = false;
+    public boolean replayToggle = false;
 
     @ConfigEntry.Gui.CollapsibleObject
     public NumericPing numericPing = new NumericPing();

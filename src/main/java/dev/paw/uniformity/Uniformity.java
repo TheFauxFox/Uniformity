@@ -2,6 +2,7 @@ package dev.paw.uniformity;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dev.paw.uniformity.commands.ReCyclerCmd;
+import dev.paw.uniformity.commands.ReplayCmd;
 import dev.paw.uniformity.config.ModConfig;
 import dev.paw.uniformity.events.ClientTickEvent;
 import dev.paw.uniformity.modules.*;
@@ -101,6 +102,7 @@ public class Uniformity implements ClientModInitializer {
         modules.add(new NoTelemetry());
         modules.add(new NumericPing());
         modules.add(new ReCycler());
+        modules.add(new Replay());
         modules.add(new Step());
         modules.add(zoom);
         bus.register(this);
@@ -114,11 +116,15 @@ public class Uniformity implements ClientModInitializer {
         for (Module m: modules) {
             if (m instanceof KeyboundModule kbm) {
                 KeyBindingHelper.registerKeyBinding(kbm.keyBind);
+                m.registerKeybindEvent();
             }
             bus.register(m);
         }
         ClientCommandRegistrationCallback.EVENT.register(
-                (dispatcher, registryAccess) -> new ReCyclerCmd(dispatcher)
+                (dispatcher, registryAccess) -> {
+                    new ReCyclerCmd(dispatcher);
+                    new ReplayCmd(dispatcher);
+                }
         );
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.OPERATOR).register(content -> {
             try {

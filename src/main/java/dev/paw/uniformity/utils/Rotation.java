@@ -27,10 +27,12 @@ public class Rotation {
     public static class Rotations {
         public float yaw;
         public float pitch;
+
         public Rotations(float yaw, float pitch) {
             this.yaw = yaw;
             this.pitch = pitch;
         }
+
         public void lookAt() {
             MinecraftClient mc = MinecraftClient.getInstance();
             if (mc.world == null || mc.player == null || mc.interactionManager == null) return;
@@ -38,8 +40,14 @@ public class Rotation {
             float p = MathHelper.wrapDegrees(pitch);
             mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.LookAndOnGround(y, p, true));
         }
+
         public static Rotations from(LivingEntity entity) {
             return new Rotations(entity.getYaw(), entity.getPitch());
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return obj instanceof Rotation && ((Rotation) obj).yaw == yaw && ((Rotation) obj).pitch == pitch;
         }
     }
 }

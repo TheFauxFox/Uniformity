@@ -20,6 +20,22 @@
     "dev.paw.uniformity.recycler.sanitySetEnchant": "Please run /recycler setEnchant <enchant> to continue!",
     "dev.paw.uniformity.recycler.sanitySetThreshold": "Please run /recycler setThreshold <0-57> to continue!",
     
+    "dev.paw.uniformity.replay.prefix": "§c§l[§4§l⏺§7§lRecorder§c§l]§7 ",
+    "dev.paw.uniformity.replay.keybind.category": "Recorder",
+    "dev.paw.uniformity.replay.keybind.startRecording": "Start Recording",
+    "dev.paw.uniformity.replay.keybind.stopRecording": "Stop Recording",
+    "dev.paw.uniformity.replay.startPlaying": "Started playing \"%s\"",
+    "dev.paw.uniformity.replay.stopPlaying": "Stopped playing",
+    "dev.paw.uniformity.replay.startRecording": "Started recording",
+    "dev.paw.uniformity.replay.stopRecording": "Stopped recording",
+    "dev.paw.uniformity.replay.looping": "Looping",
+    "dev.paw.uniformity.replay.saveRecording": "Saved recording \"%s\"",
+    "dev.paw.uniformity.replay.saveFailed": "Couldn't save recording \"%s\"",
+    "dev.paw.uniformity.replay.loadedRecording": "Loaded recording \"%s\" successfully!",
+    "dev.paw.uniformity.replay.loadFailed": "Couldn't load recording \"%s\"",
+    "dev.paw.uniformity.replay.listHeader": "§c§l========[§7§lRecordings§c§l]========",
+    "dev.paw.uniformity.replay.listFormat": " -> %s",
+    
     "dev.paw.uniformity.creative_tools": "§dCreative Tools",
     
     "dev.paw.uniformity.bee_info.custom_names": "§7Named Bees:",
@@ -43,6 +59,7 @@
     "dev.paw.uniformity.keybind.nofog": "Toggle No Fog",
     "dev.paw.uniformity.keybind.directiondisplay": "Toggle HUD Compass",
     "dev.paw.uniformity.keybind.measuringtape": "Toggle Measuring Tape",
+    "dev.paw.uniformity.keybind.replay": "Toggle Replay",
     
     "dev.paw.uniformity.fpsdisplay.fpsTitle": "%d FPS",
     "dev.paw.uniformity.displayInfo.speedDisplay": "Speed: %.2f b/s",
@@ -94,6 +111,7 @@
     "text.autoconfig.uniformity.option.mobNameplatesToggle": "Fancy Mob Nameplates",
     "text.autoconfig.uniformity.option.directionDisplayToggle": "HUD Compass",
     "text.autoconfig.uniformity.option.measuringTapeToggle": "Measuring Tape",
+    "text.autoconfig.uniformity.option.replayToggle": "Enable Replay",
     
     "text.autoconfig.uniformity.option.antiToolBreak": "Anti tool break options",
     "text.autoconfig.uniformity.option.antiToolBreak.duraValue": "Durability value",

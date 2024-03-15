@@ -22,4 +22,6 @@ public abstract class Module {
 
     @Subscribe
     public void onClientTick(ClientTickEvent evt) {}
+
+    public void registerKeybindEvent() {}
 }

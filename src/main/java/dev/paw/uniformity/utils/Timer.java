@@ -16,7 +16,7 @@ public class Timer {
         this.startTime = getCurrentTime();
     }
 
-    public boolean hasElapsed(int ms) {
+    public boolean hasElapsed(long ms) {
         return getElapsed()  >= ms;
     }
 
