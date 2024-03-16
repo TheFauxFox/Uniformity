@@ -1,12 +1,13 @@
 package dev.paw.uniformity.modules;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import dev.paw.uniformity.Uniformity;
 import dev.paw.uniformity.events.MouseButtonEvent;
 import dev.paw.uniformity.events.Render3dEvent;
 import dev.paw.uniformity.utils.Color;
 import dev.paw.uniformity.utils.Render3D;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Colors;
@@ -46,7 +47,7 @@ public class MeasuringTape extends KeyboundModule {
     @Subscribe
     public void onRender3d(Render3dEvent evt) {
         Render3D.begin(evt.matrices);
-        VertexConsumerProvider vertexConsumers = evt.bufferBuilders.getEffectVertexConsumers();
+
         if (firstPos != null && isHoldingMeasureItem()) {
             Color color = colors.get(boxes.size() % colors.size());
             evt.matrices.push();
@@ -61,7 +62,7 @@ public class MeasuringTape extends KeyboundModule {
             Color.resetShader();
             evt.matrices.pop();
 
-            drawSizeLabels(bb, evt.matrices, vertexConsumers, evt.camera.getRotation(), color);
+            drawSizeLabels(bb, evt.matrices, evt.camera.getRotation(), color);
         }
         int indx = 0;
         for (Pair<BlockPos, BlockPos> box: boxes) {
@@ -73,7 +74,7 @@ public class MeasuringTape extends KeyboundModule {
             Color.resetShader();
             evt.matrices.pop();
 
-            drawSizeLabels(bb, evt.matrices, vertexConsumers, evt.camera.getRotation(), color);
+            drawSizeLabels(bb, evt.matrices, evt.camera.getRotation(), color);
 
             indx ++;
             if (indx >= colors.size()) {
@@ -83,33 +84,72 @@ public class MeasuringTape extends KeyboundModule {
         Render3D.end(evt.matrices);
     }
 
-    private void drawSizeLabels(Box bb, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, Quaternionf rotation, Color color) {
+    private void drawSizeLabels(Box bb, MatrixStack matrixStack, Quaternionf rotation, Color color) {
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+        RenderSystem.disableDepthTest();
+        RenderSystem.disableBlend();
+
+
         matrixStack.push();
         matrixStack.translate(bb.maxX - (bb.getLengthX() / 2), bb.maxY + 0.128, bb.maxZ);
         matrixStack.multiply(rotation);
-        matrixStack.scale(-0.025f, -0.025f, 0.025f);
+        matrixStack.scale(-0.025f, -0.025f, 1);
         Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
         String text = String.valueOf((int)bb.getLengthX());
-        mc.textRenderer.draw(text, -mc.textRenderer.getWidth(text) / 2f, 0, Colors.BLACK, false, matrix4f, vertexConsumers, TextRenderer.TextLayerType.NORMAL, color.asInt, 0xF000F0);
+        int width = mc.textRenderer.getWidth(text);
+        BufferBuilder buffer = Tessellator.getInstance().getBuffer();
+        VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(buffer);
+        buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
+        buffer.vertex(matrix4f, -1, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        buffer.vertex(matrix4f, -1, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        buffer.vertex(matrix4f, width, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        buffer.vertex(matrix4f, width, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        Tessellator.getInstance().draw();
+        mc.textRenderer.draw(text, 0, 0, Colors.BLACK, false, matrix4f, immediate, TextRenderer.TextLayerType.SEE_THROUGH, 0, 15728880);
+        immediate.draw();
         matrixStack.pop();
 
         matrixStack.push();
         matrixStack.translate(bb.maxX, bb.maxY + 0.128, bb.maxZ - (bb.getLengthZ() / 2));
         matrixStack.multiply(rotation);
-        matrixStack.scale(-0.025f, -0.025f, 0.025f);
+        matrixStack.scale(-0.025f, -0.025f, 1);
         matrix4f = matrixStack.peek().getPositionMatrix();
         text = String.valueOf((int)bb.getLengthZ());
-        mc.textRenderer.draw(text, -mc.textRenderer.getWidth(text) / 2f, 0, Colors.BLACK, false, matrix4f, vertexConsumers, TextRenderer.TextLayerType.NORMAL, color.asInt, 0xF000F0);
+        width = mc.textRenderer.getWidth(text);
+        buffer = Tessellator.getInstance().getBuffer();
+        immediate = VertexConsumerProvider.immediate(buffer);
+        buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
+        buffer.vertex(matrix4f, -1, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        buffer.vertex(matrix4f, -1, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        buffer.vertex(matrix4f, width, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        buffer.vertex(matrix4f, width, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        Tessellator.getInstance().draw();
+        mc.textRenderer.draw(text, 0, 0, Colors.BLACK, false, matrix4f, immediate, TextRenderer.TextLayerType.SEE_THROUGH, 0, 15728880);
+        immediate.draw();
         matrixStack.pop();
 
         matrixStack.push();
         matrixStack.translate(bb.maxX, bb.maxY - (bb.getLengthY() / 2) + 0.128, bb.maxZ);
         matrixStack.multiply(rotation);
-        matrixStack.scale(-0.025f, -0.025f, 0.025f);
+        matrixStack.scale(-0.025f, -0.025f, 1);
         matrix4f = matrixStack.peek().getPositionMatrix();
         text = String.valueOf((int)bb.getLengthY());
-        mc.textRenderer.draw(text, -mc.textRenderer.getWidth(text) / 2f, 0, Colors.BLACK, false, matrix4f, vertexConsumers, TextRenderer.TextLayerType.NORMAL, color.asInt, 0xF000F0);
+        width = mc.textRenderer.getWidth(text);
+        buffer = Tessellator.getInstance().getBuffer();
+        immediate = VertexConsumerProvider.immediate(buffer);
+        buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
+        buffer.vertex(matrix4f, -1, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        buffer.vertex(matrix4f, -1, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        buffer.vertex(matrix4f, width, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        buffer.vertex(matrix4f, width, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        Tessellator.getInstance().draw();
+        mc.textRenderer.draw(text, 0, 0, Colors.BLACK, false, matrix4f, immediate, TextRenderer.TextLayerType.SEE_THROUGH, 0, 15728880);
+        immediate.draw();
         matrixStack.pop();
+
+
+        RenderSystem.enableDepthTest();
+        RenderSystem.enableBlend();
     }
 
     @Subscribe
