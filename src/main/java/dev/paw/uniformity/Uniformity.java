@@ -79,6 +79,7 @@ public class Uniformity implements ClientModInitializer {
         config.recyclerToggle = false;
 
         modules.add(new AntiToolBreak());
+        modules.add(new AutoClicker());
         modules.add(new AutoFish());
         modules.add(new AutoReconnect());
         modules.add(new AutoRefill());

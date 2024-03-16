@@ -40,6 +40,10 @@ public class ModConfig implements ConfigData {
     public boolean directionDisplayToggle = false;
     public boolean measuringTapeToggle = false;
     public boolean replayToggle = false;
+    public boolean autoClickerToggle = false;
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public AutoClicker autoClicker = new AutoClicker();
 
     @ConfigEntry.Gui.CollapsibleObject
     public NumericPing numericPing = new NumericPing();
@@ -70,6 +74,7 @@ public class ModConfig implements ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject
     public MeasuringTape measuringTape = new MeasuringTape();
+
 
     public static class AntiToolBreak {
         public int duraValue = 5;
@@ -145,5 +150,11 @@ public class ModConfig implements ConfigData {
 
     public static class MeasuringTape {
         public String measuringItem = "minecraft:stick";
+    }
+
+    public static class AutoClicker {
+        public boolean autoClickerUseCPS = true;
+        public int autoClickerCPS = 10;
+        public int autoClickerMS = 100;
     }
 }

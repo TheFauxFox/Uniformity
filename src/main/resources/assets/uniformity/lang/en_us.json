@@ -24,7 +24,7 @@
     "dev.paw.uniformity.replay.keybind.category": "Recorder",
     "dev.paw.uniformity.replay.keybind.startRecording": "Start Recording",
     "dev.paw.uniformity.replay.keybind.stopRecording": "Stop Recording",
-    "dev.paw.uniformity.replay.startPlaying": "Started playing \"%s\"",
+    "dev.paw.uniformity.replay.startPlaying": "Started playing %s",
     "dev.paw.uniformity.replay.stopPlaying": "Stopped playing",
     "dev.paw.uniformity.replay.startRecording": "Started recording",
     "dev.paw.uniformity.replay.stopRecording": "Stopped recording",
@@ -60,6 +60,7 @@
     "dev.paw.uniformity.keybind.directiondisplay": "Toggle HUD Compass",
     "dev.paw.uniformity.keybind.measuringtape": "Toggle Measuring Tape",
     "dev.paw.uniformity.keybind.replay": "Toggle Replay",
+    "dev.paw.uniformity.keybind.autoclicker": "Toggle AutoClicker",
     
     "dev.paw.uniformity.fpsdisplay.fpsTitle": "%d FPS",
     "dev.paw.uniformity.displayInfo.speedDisplay": "Speed: %.2f b/s",
@@ -112,6 +113,7 @@
     "text.autoconfig.uniformity.option.directionDisplayToggle": "HUD Compass",
     "text.autoconfig.uniformity.option.measuringTapeToggle": "Measuring Tape",
     "text.autoconfig.uniformity.option.replayToggle": "Enable Replay",
+    "text.autoconfig.uniformity.option.autoClickerToggle": "Enable AutoClicker",
     
     "text.autoconfig.uniformity.option.antiToolBreak": "Anti tool break options",
     "text.autoconfig.uniformity.option.antiToolBreak.duraValue": "Durability value",
@@ -125,6 +127,11 @@
     "text.autoconfig.uniformity.option.antiToolBreak.tridents": "Tridents",
     "text.autoconfig.uniformity.option.antiToolBreak.hoes": "Hoes",
     "text.autoconfig.uniformity.option.antiToolBreak.shears": "Shears",
+    
+    "text.autoconfig.uniformity.option.autoClicker": "AutoClicker options",
+    "text.autoconfig.uniformity.option.autoClicker.autoClickerUseCPS": "Use CPS instead of MS",
+    "text.autoconfig.uniformity.option.autoClicker.autoClickerCPS": "Clicks per second",
+    "text.autoconfig.uniformity.option.autoClicker.autoClickerMS": "Millisecond delay per click",
     
     "text.autoconfig.uniformity.option.numericPing": "Numeric ping options",
     "text.autoconfig.uniformity.option.numericPing.pingWidthOverride": "Resized tab ping display",
