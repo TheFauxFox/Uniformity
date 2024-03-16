@@ -1,23 +1,18 @@
 package dev.paw.uniformity.modules;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import dev.paw.uniformity.Uniformity;
 import dev.paw.uniformity.events.MouseButtonEvent;
 import dev.paw.uniformity.events.Render3dEvent;
 import dev.paw.uniformity.utils.Color;
 import dev.paw.uniformity.utils.Render3D;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.registry.Registries;
-import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import org.dizitart.jbus.Subscribe;
-import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 
 import java.util.ArrayList;
