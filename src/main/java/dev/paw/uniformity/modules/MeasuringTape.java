@@ -85,71 +85,9 @@ public class MeasuringTape extends KeyboundModule {
     }
 
     private void drawSizeLabels(Box bb, MatrixStack matrixStack, Quaternionf rotation, Color color) {
-        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
-        RenderSystem.disableDepthTest();
-        RenderSystem.disableBlend();
-
-
-        matrixStack.push();
-        matrixStack.translate(bb.maxX - (bb.getLengthX() / 2), bb.maxY + 0.128, bb.maxZ);
-        matrixStack.multiply(rotation);
-        matrixStack.scale(-0.025f, -0.025f, 1);
-        Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
-        String text = String.valueOf((int)bb.getLengthX());
-        int width = mc.textRenderer.getWidth(text);
-        BufferBuilder buffer = Tessellator.getInstance().getBuffer();
-        VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(buffer);
-        buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
-        buffer.vertex(matrix4f, -1, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
-        buffer.vertex(matrix4f, -1, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
-        buffer.vertex(matrix4f, width, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
-        buffer.vertex(matrix4f, width, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
-        Tessellator.getInstance().draw();
-        mc.textRenderer.draw(text, 0, 0, Colors.BLACK, false, matrix4f, immediate, TextRenderer.TextLayerType.SEE_THROUGH, 0, 15728880);
-        immediate.draw();
-        matrixStack.pop();
-
-        matrixStack.push();
-        matrixStack.translate(bb.maxX, bb.maxY + 0.128, bb.maxZ - (bb.getLengthZ() / 2));
-        matrixStack.multiply(rotation);
-        matrixStack.scale(-0.025f, -0.025f, 1);
-        matrix4f = matrixStack.peek().getPositionMatrix();
-        text = String.valueOf((int)bb.getLengthZ());
-        width = mc.textRenderer.getWidth(text);
-        buffer = Tessellator.getInstance().getBuffer();
-        immediate = VertexConsumerProvider.immediate(buffer);
-        buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
-        buffer.vertex(matrix4f, -1, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
-        buffer.vertex(matrix4f, -1, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
-        buffer.vertex(matrix4f, width, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
-        buffer.vertex(matrix4f, width, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
-        Tessellator.getInstance().draw();
-        mc.textRenderer.draw(text, 0, 0, Colors.BLACK, false, matrix4f, immediate, TextRenderer.TextLayerType.SEE_THROUGH, 0, 15728880);
-        immediate.draw();
-        matrixStack.pop();
-
-        matrixStack.push();
-        matrixStack.translate(bb.maxX, bb.maxY - (bb.getLengthY() / 2) + 0.128, bb.maxZ);
-        matrixStack.multiply(rotation);
-        matrixStack.scale(-0.025f, -0.025f, 1);
-        matrix4f = matrixStack.peek().getPositionMatrix();
-        text = String.valueOf((int)bb.getLengthY());
-        width = mc.textRenderer.getWidth(text);
-        buffer = Tessellator.getInstance().getBuffer();
-        immediate = VertexConsumerProvider.immediate(buffer);
-        buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
-        buffer.vertex(matrix4f, -1, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
-        buffer.vertex(matrix4f, -1, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
-        buffer.vertex(matrix4f, width, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
-        buffer.vertex(matrix4f, width, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
-        Tessellator.getInstance().draw();
-        mc.textRenderer.draw(text, 0, 0, Colors.BLACK, false, matrix4f, immediate, TextRenderer.TextLayerType.SEE_THROUGH, 0, 15728880);
-        immediate.draw();
-        matrixStack.pop();
-
-
-        RenderSystem.enableDepthTest();
-        RenderSystem.enableBlend();
+        Render3D.renderTag(String.valueOf((int)bb.getLengthX()), bb.maxX - (bb.getLengthX() / 2), bb.maxY + 0.128, bb.maxZ, matrixStack, rotation, color);
+        Render3D.renderTag(String.valueOf((int)bb.getLengthZ()), bb.maxX, bb.maxY + 0.128, bb.maxZ - (bb.getLengthZ() / 2), matrixStack, rotation, color);
+        Render3D.renderTag(String.valueOf((int)bb.getLengthY()), bb.maxX, bb.maxY - (bb.getLengthY() / 2) + 0.128, bb.maxZ, matrixStack, rotation, color);
     }
 
     @Subscribe

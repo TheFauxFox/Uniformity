@@ -2,11 +2,15 @@ package dev.paw.uniformity.utils;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Colors;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix4f;
+import org.joml.Quaternionf;
 import org.lwjgl.opengl.GL11;
 
 @SuppressWarnings("unused")
@@ -142,5 +146,39 @@ public class Render3D {
         bufferBuilder.vertex(matrix, (float)bb.minX, (float)bb.maxY, (float)bb.maxZ).next();
         bufferBuilder.vertex(matrix, (float)bb.minX, (float)bb.maxY, (float)bb.minZ).next();
         tessellator.draw();
+    }
+
+    public static void renderTag(String tag, double x, double y, double z, MatrixStack matrix, Quaternionf rotation, Color color) {
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
+        RenderSystem.disableDepthTest();
+        RenderSystem.disableBlend();
+        TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
+
+        String text = String.valueOf(tag);
+        int width = textRenderer.getWidth(text);
+
+        matrix.push();
+        matrix.translate(x, y, z);
+        matrix.multiply(rotation);
+        matrix.scale(-0.025f, -0.025f, 1);
+        matrix.translate((-width / 2f), 0.0, 0.0);
+        Matrix4f matrix4f = matrix.peek().getPositionMatrix();
+        BufferBuilder buffer = Tessellator.getInstance().getBuffer();
+        VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(buffer);
+        buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
+        buffer.vertex(matrix4f, -1, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        buffer.vertex(matrix4f, -1, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        buffer.vertex(matrix4f, width, 8, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        buffer.vertex(matrix4f, width, -1, 0).color(color.floatRed, color.floatGreen, color.floatBlue, 0.8f).next();
+        float[] components = color.floats();
+        float luminance = (0.299f * components[0] + 0.587f * components[1] + 0.114f * components[2]);
+        int textColor = luminance < 0.4f ? DyeColor.WHITE.getSignColor() : DyeColor.BLACK.getSignColor();
+        Tessellator.getInstance().draw();
+        textRenderer.draw(text, 0, 0, textColor, false, matrix4f, immediate, TextRenderer.TextLayerType.SEE_THROUGH, 0, 15728880);
+        immediate.draw();
+        matrix.pop();
+
+        RenderSystem.enableDepthTest();
+        RenderSystem.enableBlend();
     }
 }

@@ -77,4 +77,8 @@ public class Color {
     public static void resetShader() {
         RenderSystem.setShaderColor(1, 1, 1, 1);
     }
+
+    public float[] floats() {
+        return new float[]{this.floatRed, this.floatBlue, this.floatGreen, this.floatAlpha};
+    }
 }
