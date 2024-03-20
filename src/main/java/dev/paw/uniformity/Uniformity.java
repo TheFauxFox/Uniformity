@@ -104,6 +104,7 @@ public class Uniformity implements ClientModInitializer {
         modules.add(new NumericPing());
         modules.add(new ReCycler());
         modules.add(new Replay());
+        modules.add(new SnipperAura());
         modules.add(new Step());
         modules.add(zoom);
         bus.register(this);

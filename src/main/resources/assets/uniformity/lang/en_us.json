@@ -61,6 +61,7 @@
     "dev.paw.uniformity.keybind.measuringtape": "Toggle Measuring Tape",
     "dev.paw.uniformity.keybind.replay": "Toggle Replay",
     "dev.paw.uniformity.keybind.autoclicker": "Toggle AutoClicker",
+    "dev.paw.uniformity.keybind.snipperaura": "Toggle Snipper Aura",
     
     "dev.paw.uniformity.fpsdisplay.fpsTitle": "%d FPS",
     "dev.paw.uniformity.displayInfo.speedDisplay": "Speed: %.2f b/s",
@@ -114,6 +115,7 @@
     "text.autoconfig.uniformity.option.measuringTapeToggle": "Measuring Tape",
     "text.autoconfig.uniformity.option.replayToggle": "Enable Replay",
     "text.autoconfig.uniformity.option.autoClickerToggle": "Enable AutoClicker",
+    "text.autoconfig.uniformity.option.snipperAuraToggle": "Enable Snipper Aura",
     
     "text.autoconfig.uniformity.option.antiToolBreak": "Anti tool break options",
     "text.autoconfig.uniformity.option.antiToolBreak.duraValue": "Durability value",
@@ -184,5 +186,8 @@
     "text.autoconfig.uniformity.option.directionDisplay.reticleAlpha": "Reticle alpha",
     
     "text.autoconfig.uniformity.option.measuringTape": "Measuring tape options",
-    "text.autoconfig.uniformity.option.measuringTape.measuringItem": "Item to use for measuring"
+    "text.autoconfig.uniformity.option.measuringTape.measuringItem": "Item to use for measuring",
+    
+    "text.autoconfig.uniformity.option.reCycler": "ReCycler options",
+    "text.autoconfig.uniformity.option.reCycler.delayMS": "Milliseconds of delay between actions"
 }

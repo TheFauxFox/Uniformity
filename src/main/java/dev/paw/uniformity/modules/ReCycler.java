@@ -60,6 +60,7 @@ public class ReCycler extends KeyboundModule {
     public Enchantment targetEnchant = null;
     public int threshold = -1;
     public final Timer timer = new Timer();
+    public final Timer delayTimer = new Timer();
     public int step = 0;
     public boolean stepping;
     public boolean useButton = false;
@@ -154,6 +155,7 @@ public class ReCycler extends KeyboundModule {
         }
         chatMsg("dev.paw.uniformity.recycler.startMessage");
         this.timer.reset();
+        this.delayTimer.reset();
         stepping = true;
     }
 
@@ -262,11 +264,12 @@ public class ReCycler extends KeyboundModule {
 
     private boolean _villagerLoseProfesionCheck() {
         Uniformity.logger.debug("Lose librarian check");
+        delayTimer.reset();
         return !villagerInfo.getEntity().getVillagerData().getProfession().equals(VillagerProfession.LIBRARIAN);
     }
 
     private boolean _placeLecturnCheck() {
-        if (mc.world == null || mc.player == null || mc.interactionManager == null) return false;
+        if (mc.world == null || mc.player == null || mc.interactionManager == null || !delayTimer.hasElapsed(Uniformity.config.reCycler.delayMS)) return false;
         Uniformity.logger.debug("Place back lecturn");
         villagerInfo = null;
         lastOffers = null;

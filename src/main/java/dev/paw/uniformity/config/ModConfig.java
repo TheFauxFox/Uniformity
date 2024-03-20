@@ -41,6 +41,7 @@ public class ModConfig implements ConfigData {
     public boolean measuringTapeToggle = false;
     public boolean replayToggle = false;
     public boolean autoClickerToggle = false;
+    public boolean snipperAuraToggle = false;
 
     @ConfigEntry.Gui.CollapsibleObject
     public AutoClicker autoClicker = new AutoClicker();
@@ -74,6 +75,9 @@ public class ModConfig implements ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject
     public MeasuringTape measuringTape = new MeasuringTape();
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public ReCycler reCycler = new ReCycler();
 
 
     public static class AntiToolBreak {
@@ -156,5 +160,9 @@ public class ModConfig implements ConfigData {
         public boolean autoClickerUseCPS = true;
         public int autoClickerCPS = 10;
         public int autoClickerMS = 100;
+    }
+
+    public static class ReCycler {
+        public int delayMS = 10;
     }
 }
