@@ -54,6 +54,7 @@
     "dev.paw.uniformity.keybind.antitoolbreakOverride": "Override Anti Tool Break",
     "dev.paw.uniformity.keybind.entityoutline": "Toggle Entity Outline",
     "dev.paw.uniformity.keybind.recycler": "Toggle ReCycler",
+    "dev.paw.uniformity.keybind.recyclerStart": "Start ReCycler",
     "dev.paw.uniformity.keybind.autofish": "Toggle AutoFish",
     "dev.paw.uniformity.keybind.fpsdisplay": "Toggle FPS Display",
     "dev.paw.uniformity.keybind.nofog": "Toggle No Fog",

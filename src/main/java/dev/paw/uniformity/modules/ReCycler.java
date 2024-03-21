@@ -9,11 +9,13 @@ import dev.paw.uniformity.utils.Color;
 import dev.paw.uniformity.utils.Render3D;
 import dev.paw.uniformity.utils.Rotation;
 import dev.paw.uniformity.utils.Timer;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.LecternBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.MerchantScreen;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.AxeItem;
@@ -47,6 +49,7 @@ import net.minecraft.village.TradeOfferList;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.RaycastContext;
 import org.dizitart.jbus.Subscribe;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +67,7 @@ public class ReCycler extends KeyboundModule {
     public int step = 0;
     public boolean stepping;
     public boolean useButton = false;
+    public static KeyBinding startKeybind = new KeyBinding("dev.paw.uniformity.keybind.recyclerStart", -1, "dev.paw.uniformity.name");
 
     public ReCycler() {
         super("ReCycler", -1);
@@ -72,6 +76,18 @@ public class ReCycler extends KeyboundModule {
     @Override
     public boolean isEnabled() {
         return Uniformity.config.recyclerToggle;
+    }
+
+    @Override
+    public void registerKeybindEvent() {
+        KeyBindingHelper.registerKeyBinding(startKeybind);
+    }
+
+    @Override
+    public void onKeybind() {
+        while (startKeybind.wasPressed()) {
+            startStepping();
+        }
     }
 
     @Override
@@ -336,8 +352,9 @@ public class ReCycler extends KeyboundModule {
         for (Enchantment f : Registries.ENCHANTMENT) {
             String name = f.getName(1).getString();
             name = name.endsWith(" I") ? name.replaceFirst(" I$", "").replace(" ", "_").toUpperCase() : name.replace(" ", "_").toUpperCase();
-            if (!name.equals("SOUL_SPEED") && !name.equals("SWIFT_SNEAK"))
+            if (!name.equals("SOUL_SPEED") && !name.equals("SWIFT_SNEAK")) {
                 enchants.add(name);
+            }
         }
         return enchants;
     }

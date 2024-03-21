@@ -24,4 +24,6 @@ public abstract class Module {
     public void onClientTick(ClientTickEvent evt) {}
 
     public void registerKeybindEvent() {}
+
+    public void onKeybind() {}
 }

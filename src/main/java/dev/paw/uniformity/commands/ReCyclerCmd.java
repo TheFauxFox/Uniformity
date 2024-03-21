@@ -15,59 +15,48 @@ import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.lit
 public class ReCyclerCmd {
     public ReCyclerCmd(CommandDispatcher<FabricClientCommandSource> r) {
         r.register(
-                literal("recycler")
-                        .executes(command -> {
-                            ReCycler rc = Uniformity.getModule(ReCycler.class);
-                            if (rc != null) {
-                                String name = rc.targetEnchant.getName(1).getString();
-                                name = name.endsWith(" I") ? name.replaceFirst(" I$", "") : name;
-                                rc.chatMsg("Current book: "+name+" with threshold of "+rc.threshold);
-                                return 1;
-                            }
-                            return 0;
-                        })
-                        .then(literal("setEnchant").then(argument("enchant", word()).executes(command -> {
-                            ReCycler rc = Uniformity.getModule(ReCycler.class);
-                            if (rc != null) {
-                                if (rc.getEnchantList().contains(command.getArgument("enchant", String.class).toUpperCase())) {
-                                    rc.targetEnchant = Registries.ENCHANTMENT.get(new Identifier("minecraft:" + command.getArgument("enchant", String.class).toLowerCase()));
-                                    rc.chatMsg("Sucessfully set target enchant to " + command.getArgument("enchant", String.class).toUpperCase());
-                                    return 1;
-                                }
-                                rc.chatMsg("Possible enchantments: " + Arrays.toString(rc.getEnchantList().toArray()));
-                            }
-                            return 0;
-                        })))
-                        .then(literal("setThreshold").then(argument("threshold", integer(0,57)).executes(command -> {
-                            ReCycler rc = Uniformity.getModule(ReCycler.class);
-                            if (rc != null) {
-                                int t = command.getArgument("threshold", Integer.class);
-                                if (t <= 57 && t >= 0) {
-                                    rc.chatMsg("Sucessfully set threshold to "+t);
-                                    rc.threshold = t;
-                                    return 1;
-                                }
-                            }
-                            return 0;
-                        })))
-                        .then(literal("clear").executes(command -> {
-                            ReCycler rc = Uniformity.getModule(ReCycler.class);
-                            if (rc != null) {
-                                rc.targetEnchant = null;
-                                rc.threshold = 0;
-                                rc.villager = null;
-                                rc.villagerInfo = null;
-                                return 1;
-                            }
-                            return 0;
-                        }))
-                        .then(literal("start").executes(command -> {
-                            ReCycler rc = Uniformity.getModule(ReCycler.class);
-                            if (rc != null) {
-                                rc.startStepping();
-                            }
-                            return 1;
-                        }))
+            literal("recycler")
+                .then(literal("clear").executes(command -> {
+                    ReCycler rc = Uniformity.getModule(ReCycler.class);
+                    if (rc != null) {
+                        rc.targetEnchant = null;
+                        rc.threshold = 0;
+                        rc.villager = null;
+                        rc.villagerInfo = null;
+                        return 1;
+                    }
+                    return 0;
+                }))
+                .then(literal("start").executes(command -> {
+                    ReCycler rc = Uniformity.getModule(ReCycler.class);
+                    if (rc != null) {
+                        rc.startStepping();
+                    }
+                    return 1;
+                }))
+                .then(literal("set").then(argument("enchant", word()).then(argument("threshold", integer(0, 56)).executes(command -> {
+                    ReCycler rc = Uniformity.getModule(ReCycler.class);
+                    if (rc != null) {
+                        String enchant = command.getArgument("enchant", String.class).toUpperCase();
+                        String enchantBase = enchant;
+                        if (rc.getEnchantList().contains(enchant)) {
+                            if (enchant.equals("SWEEPING_EDGE")) enchant = "SWEEPING";
+                            rc.targetEnchant = Registries.ENCHANTMENT.get(new Identifier("minecraft", enchant.toLowerCase()));
+                            rc.chatMsg("Sucessfully set target enchant to " + enchantBase);
+                        } else {
+                            rc.chatMsg("§cFailed to set target enchant to " + enchantBase);
+                            rc.chatMsg("Possible enchantments: " + Arrays.toString(rc.getEnchantList().toArray()));
+                        }
+                        int t = command.getArgument("threshold", Integer.class);
+                        if (t <= 57 && t >= 0) {
+                            rc.chatMsg("Sucessfully set threshold to " + t);
+                            rc.threshold = t;
+                        } else {
+                            rc.chatMsg("§cThreshold must be between 0 and 57");
+                        }
+                    }
+                    return 0;
+                }))))
         );
     }
 }
