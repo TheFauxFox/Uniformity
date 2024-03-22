@@ -170,9 +170,8 @@ public class Uniformity implements ClientModInitializer {
                     wasKeybindSave = true;
                     configHolder.save();
                 }
-            } else {
-                m.onKeybind();
             }
+            m.onKeybind();
         }
     }
 

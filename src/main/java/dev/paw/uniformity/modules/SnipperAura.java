@@ -18,7 +18,7 @@ import net.minecraft.world.RaycastContext;
 
 public class SnipperAura extends KeyboundModule {
     public SnipperAura() {
-        super("SniperAura", -1);
+        super("SnipperAura", -1);
     }
 
     @Override

@@ -49,7 +49,6 @@ import net.minecraft.village.TradeOfferList;
 import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.RaycastContext;
 import org.dizitart.jbus.Subscribe;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
 import java.util.List;
