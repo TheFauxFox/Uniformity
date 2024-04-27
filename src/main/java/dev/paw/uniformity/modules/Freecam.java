@@ -2,6 +2,7 @@ package dev.paw.uniformity.modules;
 
 import dev.paw.uniformity.Uniformity;
 import dev.paw.uniformity.events.*;
+import dev.paw.uniformity.utils.Color;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -192,7 +193,7 @@ public class Freecam extends KeyboundModule {
     @Subscribe
     public void setGlowColor(TeamColorEvent evt) {
         if (isEnabled() && evt.entity == mc.player && Uniformity.config.freecam.highlightPlayer) {
-            evt.setColor(65280);
+            evt.setColor(Color.hex(Uniformity.config.freecam.highlightHex));
         }
     }
 

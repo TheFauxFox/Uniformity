@@ -42,6 +42,7 @@ public class ModConfig implements ConfigData {
     public boolean replayToggle = false;
     public boolean autoClickerToggle = false;
     public boolean snipperAuraToggle = false;
+    public boolean randomPlacementToggle = false;
 
     @ConfigEntry.Gui.CollapsibleObject
     public AutoClicker autoClicker = new AutoClicker();
@@ -110,6 +111,7 @@ public class ModConfig implements ConfigData {
     public static class Freecam {
         public boolean highlightPlayer = false;
         public boolean toggleOnDamage = true;
+        public String highlightHex = "55FF55";
     }
 
     public static class AutoReconnect {

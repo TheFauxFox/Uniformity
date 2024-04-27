@@ -102,6 +102,7 @@ public class Uniformity implements ClientModInitializer {
         modules.add(new NoHurtAngle());
         modules.add(new NoTelemetry());
         modules.add(new NumericPing());
+        modules.add(new RandomPlacement());
         modules.add(new ReCycler());
         modules.add(new Replay());
         modules.add(new SnipperAura());

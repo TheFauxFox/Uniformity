@@ -63,6 +63,7 @@
     "dev.paw.uniformity.keybind.replay": "Toggle Replay",
     "dev.paw.uniformity.keybind.autoclicker": "Toggle AutoClicker",
     "dev.paw.uniformity.keybind.snipperaura": "Toggle Snipper Aura",
+    "dev.paw.uniformity.keybind.randomplacement": "Toggle Random Block Placement",
     
     "dev.paw.uniformity.fpsdisplay.fpsTitle": "%d FPS",
     "dev.paw.uniformity.displayInfo.speedDisplay": "Speed: %.2f b/s",
@@ -117,6 +118,7 @@
     "text.autoconfig.uniformity.option.replayToggle": "Enable Replay",
     "text.autoconfig.uniformity.option.autoClickerToggle": "Enable AutoClicker",
     "text.autoconfig.uniformity.option.snipperAuraToggle": "Enable Snipper Aura",
+    "text.autoconfig.uniformity.option.randomPlacementToggle": "Enable Random Placement",
     
     "text.autoconfig.uniformity.option.antiToolBreak": "Anti tool break options",
     "text.autoconfig.uniformity.option.antiToolBreak.duraValue": "Durability value",
@@ -150,6 +152,7 @@
     "text.autoconfig.uniformity.option.freecam": "Freecam options",
     "text.autoconfig.uniformity.option.freecam.highlightPlayer": "Show player outline",
     "text.autoconfig.uniformity.option.freecam.toggleOnDamage": "Disable freecam on damage",
+    "text.autoconfig.uniformity.option.freecam.highlightHex": "Hex color of player outline",
     
     "text.autoconfig.uniformity.option.autoReconnect": "AutoReconnect options",
     "text.autoconfig.uniformity.option.autoReconnect.timeJitter": "Jitter time on reconnect",
