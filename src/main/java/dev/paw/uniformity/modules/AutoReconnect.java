@@ -39,6 +39,7 @@ public class AutoReconnect extends Module {
 
     @Subscribe
     public void onDisconnectScreen(DisconnectScreenEvent evt) {
+        if (mc.world == null || mc.world.isClient()) return;
         parent = evt.parent;
         ButtonWidget reconnectButton = evt.grid.add(
                 ButtonWidget.builder(
