@@ -128,11 +128,12 @@ public class Replay extends KeyboundModule {
     public static class Step {
         public static MinecraftClient mc = MinecraftClient.getInstance();
         public boolean fw, bk, lf, rt, sn, jp, us, at;
+        public int slot;
         public Rotation.Rotations ro;
         public long duration;
         public final Timer timer;
 
-        private Step(boolean fw, boolean bk, boolean lf, boolean rt, boolean sn, boolean jp, boolean us, boolean at, Rotation.Rotations ro) {
+        private Step(boolean fw, boolean bk, boolean lf, boolean rt, boolean sn, boolean jp, boolean us, boolean at, int slot, Rotation.Rotations ro) {
             this.fw = fw;
             this.bk = bk;
             this.lf = lf;
@@ -142,10 +143,12 @@ public class Replay extends KeyboundModule {
             this.us = us;
             this.at = at;
             this.ro = ro;
+            this.slot = slot;
             this.timer = new Timer();
         }
 
         public void apply() {
+            if (mc.player != null) mc.player.getInventory().selectedSlot = slot;
             mc.options.forwardKey.setPressed(fw);
             mc.options.backKey.setPressed(bk);
             mc.options.leftKey.setPressed(lf);
@@ -221,6 +224,8 @@ public class Replay extends KeyboundModule {
             return mc.options.attackKey.isPressed();
         }
 
+        public static int _slot() {return mc.player.getInventory().selectedSlot; }
+
         public static Rotation.Rotations _rotation() {
             return Rotation.Rotations.from(mc.player);
         }
@@ -228,13 +233,13 @@ public class Replay extends KeyboundModule {
         @Override
         public boolean equals(Object obj) {
             if (obj instanceof Step sp) {
-                return sp.fw == fw && sp.bk == bk && sp.lf == lf && sp.rt == rt && sp.sn == sn && sp.jp == jp && sp.us == us && sp.at == at && sp.ro.equals(ro);
+                return sp.fw == fw && sp.bk == bk && sp.lf == lf && sp.rt == rt && sp.sn == sn && sp.jp == jp && sp.us == us && sp.at == at && sp.slot == slot && sp.ro.equals(ro);
             }
             return false;
         }
 
         public static Step _new() {
-            return new Step(_forwardKey(), _backKey(), _leftKey(), _rightKey(), _sneakKey(), _jumpKey(), _useKey(), _attackKey(), _rotation());
+            return new Step(_forwardKey(), _backKey(), _leftKey(), _rightKey(), _sneakKey(), _jumpKey(), _useKey(), _attackKey(), _slot(), _rotation());
         }
 
         public void toJson() {
