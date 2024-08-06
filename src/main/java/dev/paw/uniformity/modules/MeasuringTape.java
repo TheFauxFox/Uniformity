@@ -106,7 +106,7 @@ public class MeasuringTape extends KeyboundModule {
     }
 
     private boolean isHoldingMeasureItem() {
-        return mc.player != null && mc.player.isHolding(Registries.ITEM.get(new Identifier(Uniformity.config.measuringTape.measuringItem)));
+        return mc.player != null && mc.player.isHolding(Registries.ITEM.get(Identifier.of(Uniformity.config.measuringTape.measuringItem)));
     }
 
     private BlockPos getTargetedBlockPos() {

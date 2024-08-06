@@ -32,14 +32,13 @@ public class MouseMixin {
     }
 
     @Inject(method = "updateMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/GameOptions;getInvertYMouse()Lnet/minecraft/client/option/SimpleOption;"), cancellable = true)
-    public void omMouseMove(CallbackInfo ci, @Local(ordinal = 1) double e, @Local(ordinal = 2) LocalDoubleRef k, @Local(ordinal = 3) LocalDoubleRef l, @Local(ordinal = 6) double h) {
-        MouseMoveEvent mme = new MouseMoveEvent(k.get(), l.get());
-        Uniformity.bus.post(mme);
+    public void omMouseMove(CallbackInfo ci, @Local(ordinal = 1) LocalDoubleRef i, @Local(ordinal = 2) LocalDoubleRef j) {
+        MouseMoveEvent mme = Uniformity.bus.post(new MouseMoveEvent(i.get(), j.get()));
         if (mme.isCancelled()) {
             ci.cancel();
         } else {
-            k.set(mme.getX());
-            l.set(mme.getY());
+            i.set(mme.getX());
+            j.set(mme.getY());
         }
     }
 }

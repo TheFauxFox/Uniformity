@@ -30,7 +30,7 @@ public class AutoReconnect extends Module {
             return;
         }
 
-        ConnectScreen.connect(prevScreen, MinecraftClient.getInstance(), ServerAddress.parse(lastServer.address), lastServer, false);
+        ConnectScreen.connect(prevScreen, MinecraftClient.getInstance(), ServerAddress.parse(lastServer.address), lastServer, false, null);
     }
 
     public static int getWaitTicks() {

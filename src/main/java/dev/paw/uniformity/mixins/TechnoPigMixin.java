@@ -22,6 +22,6 @@ public abstract class TechnoPigMixin extends LivingEntityRenderer {
 
     @Inject(method = "<init>(Lnet/minecraft/client/render/entity/EntityRendererFactory$Context;)V", at = @At("TAIL"))
     private void addTechnoCrownFeature(EntityRendererFactory.Context context, CallbackInfo ci) {
-        this.addFeature(new TechnoPig(((PigEntityRenderer) (Object) this), new PigEntityModel(context.getPart(EntityModelLayers.PIG_SADDLE)), new Identifier("uniformity","technocrown.png")));
+        this.addFeature(new TechnoPig(((PigEntityRenderer) (Object) this), new PigEntityModel(context.getPart(EntityModelLayers.PIG_SADDLE)), Identifier.of("uniformity","technocrown.png")));
     }
 }

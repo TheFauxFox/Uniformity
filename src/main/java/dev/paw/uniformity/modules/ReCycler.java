@@ -5,11 +5,11 @@ import dev.paw.uniformity.events.ClientTickEvent;
 import dev.paw.uniformity.events.MouseButtonEvent;
 import dev.paw.uniformity.events.PacketEvent;
 import dev.paw.uniformity.events.Render3dEvent;
-import dev.paw.uniformity.utils.Color;
-import dev.paw.uniformity.utils.Render3D;
-import dev.paw.uniformity.utils.Rotation;
+import dev.paw.uniformity.utils.*;
 import dev.paw.uniformity.utils.Timer;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.mixin.registry.sync.RegistriesAccessor;
+import net.fabricmc.fabric.mixin.registry.sync.RegistryKeysMixin;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.LecternBlock;
@@ -17,6 +17,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.MerchantScreen;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.EnchantedBookItem;
@@ -30,7 +31,11 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.network.packet.s2c.play.CloseScreenS2CPacket;
 import net.minecraft.network.packet.s2c.play.OpenScreenS2CPacket;
 import net.minecraft.network.packet.s2c.play.SetTradeOffersS2CPacket;
+import net.minecraft.predicate.item.EnchantmentsPredicate;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryEntryLookup;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -50,9 +55,7 @@ import net.minecraft.village.VillagerProfession;
 import net.minecraft.world.RaycastContext;
 import org.dizitart.jbus.Subscribe;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class ReCycler extends KeyboundModule {
     public TradeOfferList lastOffers = null;
@@ -301,10 +304,10 @@ public class ReCycler extends KeyboundModule {
             case 3 -> step += _villagerSanityCheck() ? 1 : 0;
             case 4 ->  {
                 if (_bookSanityCheck()) {
-                    chatMsg("dev.paw.uniformity.recycler.bookFoundMessage", villagerInfo.getEnchantment().getName(villagerInfo.getBookLvl()).getString(), villagerInfo.getPrice());
-                    mc.player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 1, 1);
-                    mc.player.playSound(SoundEvents.ENTITY_VILLAGER_YES, SoundCategory.MASTER, 0.5f, 1);
-                    mc.player.playSound(SoundEvents.ENTITY_FIREWORK_ROCKET_LARGE_BLAST, SoundCategory.MASTER, 0.4f, 1);
+                    chatMsg("dev.paw.uniformity.recycler.bookFoundMessage", Str.getEnchantName(villagerInfo.getEnchantment()).getString(), villagerInfo.getPrice());
+                    mc.player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP);
+                    mc.player.playSound(SoundEvents.ENTITY_VILLAGER_YES);
+                    mc.player.playSound(SoundEvents.ENTITY_FIREWORK_ROCKET_LARGE_BLAST);
                     chatMsg("dev.paw.uniformity.recycler.timeTakenMessage", timer.getTimeStr());
                     stepping = false;
                     mc.player.closeHandledScreen();
@@ -330,7 +333,7 @@ public class ReCycler extends KeyboundModule {
             if(mc.world.getBlockState(neighbor).getOutlineShape(mc.world, pos) == VoxelShapes.empty() || mc.world.getBlockState(neighbor).isReplaceable()) continue;
             Vec3d dirVec = Vec3d.of(side.getVector());
             Vec3d hitVec = posVec.add(dirVec.multiply(0.5));
-            if (eyesPos.squaredDistanceTo(hitVec) > mc.interactionManager.getReachDistance()) continue;
+            if (eyesPos.squaredDistanceTo(hitVec) > mc.player.getBlockInteractionRange()) continue;
             if (distanceSqPosVec > eyesPos.squaredDistanceTo(posVec.add(dirVec))) continue;
             if (mc.world.raycast(new RaycastContext(eyesPos, hitVec, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, mc.player)).getType() != HitResult.Type.MISS) continue;
             Rotation.Rotations rotation = Rotation.getNeededRotations(hitVec);
@@ -347,13 +350,10 @@ public class ReCycler extends KeyboundModule {
     }
 
     public List<String> getEnchantList() {
+        if (mc.world == null) return null;
         ArrayList<String> enchants = new ArrayList<>();
-        for (Enchantment f : Registries.ENCHANTMENT) {
-            String name = f.getName(1).getString();
-            name = name.endsWith(" I") ? name.replaceFirst(" I$", "").replace(" ", "_").toUpperCase() : name.replace(" ", "_").toUpperCase();
-            if (!name.equals("SOUL_SPEED") && !name.equals("SWIFT_SNEAK")) {
-                enchants.add(name);
-            }
+        for (Enchantment f : mc.world.getRegistryManager().get(RegistryKeys.ENCHANTMENT)) {
+            enchants.add(f.toString().replace("Enchantment ", "").replace(" ", "_").toUpperCase());
         }
         return enchants;
     }
@@ -413,18 +413,18 @@ public class ReCycler extends KeyboundModule {
 
             for (TradeOffer trade: tradeOffers) {
                 if (trade.getSellItem().getItem() instanceof EnchantedBookItem) {
-                    emeraldPrice = trade.getAdjustedFirstBuyItem().getCount();
+                    emeraldPrice = trade.getDisplayedFirstBuyItem().getCount();
                     book = trade.getSellItem();
                     break;
                 }
             }
             if (bookless()) return;
 
-            NbtList nbt = EnchantedBookItem.getEnchantmentNbt(book);
-            NbtCompound element = nbt.getCompound(0);
-            String bookType = element.getString("id");
-            bookLvl = element.getInt("lvl");
-            enchant = Registries.ENCHANTMENT.get(new Identifier(bookType));
+            Optional<RegistryEntry<Enchantment>> enchantment = book.getEnchantments().getEnchantments().stream().findFirst();
+            if (enchantment.isPresent()) {
+                bookLvl = book.getEnchantments().getLevel(enchantment.get());
+                enchant = enchantment.get().value();
+            }
         }
 
         public boolean bookless() {

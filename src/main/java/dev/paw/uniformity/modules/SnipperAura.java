@@ -38,7 +38,7 @@ public class SnipperAura extends KeyboundModule {
                             if(mc.world.getBlockState(neighbor).getOutlineShape(mc.world, pos) == VoxelShapes.empty() || mc.world.getBlockState(neighbor).isReplaceable()) continue;
                             Vec3d dirVec = Vec3d.of(side.getVector());
                             Vec3d hitVec = posVec.add(dirVec.multiply(0.5));
-                            if (eyesPos.squaredDistanceTo(hitVec) > mc.interactionManager.getReachDistance()) continue;
+                            if (eyesPos.squaredDistanceTo(hitVec) > mc.player.getBlockInteractionRange()) continue;
                             if (distanceSqPosVec > eyesPos.squaredDistanceTo(posVec.add(dirVec))) continue;
                             if (mc.world.raycast(new RaycastContext(eyesPos, hitVec, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, mc.player)).getType() != HitResult.Type.MISS) continue;
                             Rotation.Rotations rotation = Rotation.getNeededRotations(hitVec);

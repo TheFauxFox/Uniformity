@@ -30,7 +30,7 @@ public class TechnoPig<T extends Entity & Saddleable, M extends EntityModel<T>> 
             this.model.animateModel(entity, limbAngle, limbDistance, tickDelta);
             this.model.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(this.TEXTURE));
-            this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+            this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV);
         }
     }
 }

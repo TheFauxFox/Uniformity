@@ -5,7 +5,6 @@ import dev.paw.uniformity.events.ClientPlayerEvent;
 import dev.paw.uniformity.utils.Number;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.BlockItem;
-import net.minecraft.util.Hand;
 import org.dizitart.jbus.Subscribe;
 
 import java.util.ArrayList;

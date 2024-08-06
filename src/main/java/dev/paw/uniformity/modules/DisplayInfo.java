@@ -6,6 +6,7 @@ import dev.paw.uniformity.utils.Color;
 import dev.paw.uniformity.utils.Number;
 import dev.paw.uniformity.utils.Str;
 import dev.paw.uniformity.utils.Timer;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +20,7 @@ public class DisplayInfo extends Module {
     private final Timer speedTimer = new Timer();
     private double lastSpeed = 0;
     private Vec3d lastPos;
-    
+
     public DisplayInfo() {
         super("DisplayInfo");
     }
@@ -45,7 +46,7 @@ public class DisplayInfo extends Module {
             evt.ctx.getMatrices().translate(-x, -y, 0);
 
             if (Uniformity.config.displayInfo.speed) {
-                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.speedDisplay", Number.round(getSpeed(),2)), x, y, Color.WHITE.asInt);
+                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.speedDisplay", Number.round(getSpeed(), 2)), x, y, Color.WHITE.asInt);
                 y += 11;
             }
             if (Uniformity.config.displayInfo.coords) {
@@ -55,11 +56,11 @@ public class DisplayInfo extends Module {
                 double pz = fc != null && fc.isEnabled() ? fc.z : mc.player.getZ();
                 evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.positionTitle"), x, y, Color.WHITE.asInt);
                 y += 11;
-                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.positionX", Number.round(px,2)), x, y, Color.WHITE.asInt);
+                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.positionX", Number.round(px, 2)), x, y, Color.WHITE.asInt);
                 y += 11;
-                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.positionY", Number.round(py,2)), x, y, Color.WHITE.asInt);
+                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.positionY", Number.round(py, 2)), x, y, Color.WHITE.asInt);
                 y += 11;
-                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.positionZ", Number.round(pz,2)), x, y, Color.WHITE.asInt);
+                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.positionZ", Number.round(pz, 2)), x, y, Color.WHITE.asInt);
                 y += 11;
             }
             if (Uniformity.config.displayInfo.netherCoords) {
@@ -68,9 +69,9 @@ public class DisplayInfo extends Module {
                 double pz = fc != null && fc.isEnabled() ? fc.z : mc.player.getZ();
                 evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.netherPosTitle"), x, y, Color.WHITE.asInt);
                 y += 11;
-                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.netherPosX", Number.round(px / 8,2)), x, y, Color.WHITE.asInt);
+                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.netherPosX", Number.round(px / 8, 2)), x, y, Color.WHITE.asInt);
                 y += 11;
-                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.netherPosZ", Number.round(pz / 8,2)), x, y, Color.WHITE.asInt);
+                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.netherPosZ", Number.round(pz / 8, 2)), x, y, Color.WHITE.asInt);
                 y += 11;
             }
             if (Uniformity.config.displayInfo.biome) {
@@ -105,14 +106,14 @@ public class DisplayInfo extends Module {
                 y += 11;
                 evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.recycler.lecturn", rc.lecternPos == null ? Text.translatable("dev.paw.uniformity.cross") : Text.translatable("dev.paw.uniformity.check")), x, y, Color.WHITE.asInt);
                 y += 11;
-                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.stringifiedTranslatable("dev.paw.uniformity.displayInfo.recycler.enchant", rc.targetEnchant == null ? Text.translatable("dev.paw.uniformity.cross") : rc.targetEnchant.getName(rc.targetEnchant.getMaxLevel())), x, y, Color.WHITE.asInt);
+                evt.ctx.drawTextWithShadow(mc.textRenderer, Text.stringifiedTranslatable("dev.paw.uniformity.displayInfo.recycler.enchant", rc.targetEnchant == null ? Text.translatable("dev.paw.uniformity.cross") : Str.getEnchantName(rc.targetEnchant)), x, y, Color.WHITE.asInt);
                 y += 11;
                 evt.ctx.drawTextWithShadow(mc.textRenderer, Text.stringifiedTranslatable("dev.paw.uniformity.displayInfo.recycler.threshold", rc.threshold == -1 ? Text.translatable("dev.paw.uniformity.cross") : rc.threshold), x, y, Color.WHITE.asInt);
                 y += 11;
                 if (rc.stepping) {
                     evt.ctx.drawTextWithShadow(mc.textRenderer, Text.translatable("dev.paw.uniformity.displayInfo.recycler.time", rc.timer.getTimeStr()), x, y, Color.WHITE.asInt);
                     y += 11;
-                    evt.ctx.drawTextWithShadow(mc.textRenderer, Text.stringifiedTranslatable("dev.paw.uniformity.displayInfo.recycler.lastBook", (rc.villagerInfo != null && !rc.villagerInfo.bookless()) ? rc.villagerInfo.getEnchantment().getName(rc.villagerInfo.getBookLvl()) : Text.translatable("dev.paw.uniformity.cross")), x, y, Color.WHITE.asInt);
+                    evt.ctx.drawTextWithShadow(mc.textRenderer, Text.stringifiedTranslatable("dev.paw.uniformity.displayInfo.recycler.lastBook", (rc.villagerInfo != null && !rc.villagerInfo.bookless()) ? Str.getEnchantName(rc.villagerInfo.getEnchantment()) : Text.translatable("dev.paw.uniformity.cross")), x, y, Color.WHITE.asInt);
                     y += 11;
                     evt.ctx.drawTextWithShadow(mc.textRenderer, Text.stringifiedTranslatable("dev.paw.uniformity.displayInfo.recycler.lastValue", rc.villagerInfo != null && !rc.villagerInfo.bookless() ? rc.villagerInfo.getPrice() : Text.translatable("dev.paw.uniformity.cross")), x, y, Color.WHITE.asInt);
                 }
@@ -126,11 +127,11 @@ public class DisplayInfo extends Module {
             return lastSpeed;
         }
         if (lastPos == null) {
-            lastPos = mc.player.getPos().multiply(1,0,1);
+            lastPos = mc.player.getPos().multiply(1, 0, 1);
         }
         if (speedTimer.hasElapsed(50) && mc.player.getPos().distanceTo(lastPos) != 0) {
-            lastSpeed = mc.player.getPos().multiply(1,0,1).distanceTo(lastPos) / 0.05D;
-            lastPos = mc.player.getPos().multiply(1,0,1);
+            lastSpeed = mc.player.getPos().multiply(1, 0, 1).distanceTo(lastPos) / 0.05D;
+            lastPos = mc.player.getPos().multiply(1, 0, 1);
             speedTimer.reset();
         }
         return lastSpeed;

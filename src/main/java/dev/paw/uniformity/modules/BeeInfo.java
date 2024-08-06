@@ -1,7 +1,11 @@
 package dev.paw.uniformity.modules;
 
+import com.mojang.serialization.Decoder;
+import com.mojang.serialization.MapDecoder;
 import dev.paw.uniformity.Uniformity;
 import dev.paw.uniformity.events.GetTooltipEvent;
+import net.minecraft.component.ComponentMap;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -19,11 +23,11 @@ public class BeeInfo extends Module {
         if (!isEnabled()) return;
         if (evt.item != Items.BEEHIVE && evt.item != Items.BEE_NEST) return;
 
-        NbtCompound nbt = evt.nbt;
+        ComponentMap nbt = evt.nbt;
         if (nbt == null) return;
 
-        int honeyLevel = nbt.getCompound("BlockStateTag").getInt("honey_level");
-        NbtList beeList = nbt.getCompound("BlockEntityTag").getList("Bees", NbtElement.COMPOUND_TYPE);
+        int honeyLevel = nbt.get(DataComponentTypes.BLOCK_ENTITY_DATA).copyNbt().getInt("honey_level");
+        NbtList beeList = nbt.get(DataComponentTypes.BLOCK_ENTITY_DATA).copyNbt().getList("Bees", NbtElement.COMPOUND_TYPE);
         int beeCount = beeList.size();
 
         boolean hasCustomBees = false;

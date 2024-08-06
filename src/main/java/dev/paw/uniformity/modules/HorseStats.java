@@ -2,6 +2,7 @@ package dev.paw.uniformity.modules;
 
 import dev.paw.uniformity.Uniformity;
 import dev.paw.uniformity.events.RenderHorseScreenEvent;
+import dev.paw.uniformity.mixins.accessors.IA_AbstractHorseEntity;
 import dev.paw.uniformity.utils.Color;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -50,7 +51,7 @@ public class HorseStats extends Module {
 
         double horseSpeed = entity.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED) * 42.157796;
         double jumpHeight = 0;
-        double jumpStrength = entity.getJumpStrength();
+        double jumpStrength = ((IA_AbstractHorseEntity)entity).getJumpStrength();
 
         while(jumpStrength > 0) {
             jumpHeight += jumpStrength;

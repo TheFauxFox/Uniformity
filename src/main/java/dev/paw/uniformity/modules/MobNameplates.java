@@ -47,10 +47,10 @@ public class MobNameplates extends Module {
         Matrix4f matrix = evt.matrixStack.peek().getPositionMatrix();
 
         VertexConsumer builder = evt.vertexConsumers.getBuffer(RenderLayer.getTextBackgroundSeeThrough());
-        builder.vertex(matrix, -halfSize - 2, -6, 0.01F).color(0, 0, 0, 64).light(0xF000F0).next();
-        builder.vertex(matrix, -halfSize - 2, 6 + 2, 0.01F).color(0, 0, 0, 64).light(0xF000F0).next();
-        builder.vertex(matrix, halfSize + 2, 6 + 2, 0.01F).color(0, 0, 0, 64).light(0xF000F0).next();
-        builder.vertex(matrix, halfSize + 2, -6, 0.01F).color(0, 0, 0, 64).light(0xF000F0).next();
+        builder.vertex(matrix, -halfSize - 2, -6, 0.01F).color(0, 0, 0, 64).light(0xF000F0);
+        builder.vertex(matrix, -halfSize - 2, 6 + 2, 0.01F).color(0, 0, 0, 64).light(0xF000F0);
+        builder.vertex(matrix, halfSize + 2, 6 + 2, 0.01F).color(0, 0, 0, 64).light(0xF000F0);
+        builder.vertex(matrix, halfSize + 2, -6, 0.01F).color(0, 0, 0, 64).light(0xF000F0);
 
         int argb = getColor(livingEntity);
         int r = (argb >> 16) & 0xFF;
@@ -59,16 +59,16 @@ public class MobNameplates extends Module {
         float maxHealth = Math.max(livingEntity.getHealth(), livingEntity.getMaxHealth());
         float healthHalfSize = halfSize * (livingEntity.getHealth() / maxHealth);
 
-        builder.vertex(matrix, -halfSize, 0, 0.001F).color(r, g, b, 127).light(0xF000F0).next();
-        builder.vertex(matrix, -halfSize, 4, 0.001F).color(r, g, b, 127).light(0xF000F0).next();
-        builder.vertex(matrix, -halfSize + 2 * healthHalfSize, 4, 0.001F).color(r, g, b, 127).light(0xF000F0).next();
-        builder.vertex(matrix, -halfSize + 2 * healthHalfSize, 0, 0.001F).color(r, g, b, 127).light(0xF000F0).next();
+        builder.vertex(matrix, -halfSize, 0, 0.001F).color(r, g, b, 127).light(0xF000F0);
+        builder.vertex(matrix, -halfSize, 4, 0.001F).color(r, g, b, 127).light(0xF000F0);
+        builder.vertex(matrix, -halfSize + 2 * healthHalfSize, 4, 0.001F).color(r, g, b, 127).light(0xF000F0);
+        builder.vertex(matrix, -halfSize + 2 * healthHalfSize, 0, 0.001F).color(r, g, b, 127).light(0xF000F0);
 
         if (healthHalfSize < halfSize) {
-            builder.vertex(matrix, -halfSize + 2 * healthHalfSize, 0, 0.001F).color(0, 0, 0, 127).light(0xF000F0).next();
-            builder.vertex(matrix, -halfSize + 2 * healthHalfSize, 4, 0.001F).color(0, 0, 0, 127).light(0xF000F0).next();
-            builder.vertex(matrix, halfSize, 4, 0.001F).color(0, 0, 0, 127).light(0xF000F0).next();
-            builder.vertex(matrix, halfSize, 0, 0.001F).color(0, 0, 0, 127).light(0xF000F0).next();
+            builder.vertex(matrix, -halfSize + 2 * healthHalfSize, 0, 0.001F).color(0, 0, 0, 127).light(0xF000F0);
+            builder.vertex(matrix, -halfSize + 2 * healthHalfSize, 4, 0.001F).color(0, 0, 0, 127).light(0xF000F0);
+            builder.vertex(matrix, halfSize, 4, 0.001F).color(0, 0, 0, 127).light(0xF000F0);
+            builder.vertex(matrix, halfSize, 0, 0.001F).color(0, 0, 0, 127).light(0xF000F0);
         }
 
         evt.matrixStack.push();

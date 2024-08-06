@@ -22,6 +22,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.tutorial.TutorialStep;
 import net.minecraft.item.*;
 import net.minecraft.nbt.StringNbtReader;
+import net.minecraft.registry.BuiltinRegistries;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
@@ -56,8 +57,8 @@ public class Uniformity implements ClientModInitializer {
         AutoConfig.register(ModConfig.class, GsonConfigSerializer::new);
 
         FabricLoader.getInstance().getModContainer("uniformity").ifPresent(modContainer -> {
-            ResourceManagerHelper.registerBuiltinResourcePack(new Identifier("uniformity", "dark_gui"), modContainer, ResourcePackActivationType.NORMAL);
-            ResourceManagerHelper.registerBuiltinResourcePack(new Identifier("uniformity", "smooth_font"), modContainer, ResourcePackActivationType.NORMAL);
+            ResourceManagerHelper.registerBuiltinResourcePack(Identifier.of("uniformity", "dark_gui"), modContainer, ResourcePackActivationType.NORMAL);
+            ResourceManagerHelper.registerBuiltinResourcePack(Identifier.of("uniformity", "smooth_font"), modContainer, ResourcePackActivationType.NORMAL);
         });
 
         configHolder = AutoConfig.getConfigHolder(ModConfig.class);
@@ -129,19 +130,19 @@ public class Uniformity implements ClientModInitializer {
                     new ReplayCmd(dispatcher);
                 }
         );
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.OPERATOR).register(content -> {
-            try {
-                ItemStack pot = Items.SPLASH_POTION.getDefaultStack();
-                pot.setNbt(StringNbtReader.parse("{display:{Name:'{\"text\":\"Splash Potion of Instant Death\",\"color\":\"white\",\"italic\":false}',Lore:['{\"text\":\"Instant Death\",\"color\":\"red\",\"italic\":false}']},HideFlags:34,Enchantments:[{}],custom_potion_effects:[{id:\"minecraft:instant_health\",amplifier:125b,duration:2000}],CustomPotionColor:8010938}"));
-                content.add(pot);
-                pot = Items.LINGERING_POTION.getDefaultStack();
-                pot.setNbt(StringNbtReader.parse("{display:{Name:'{\"text\":\"Lingering Potion of Instant Death\",\"color\":\"white\",\"italic\":false}',Lore:['{\"text\":\"Instant Death\",\"color\":\"red\",\"italic\":false}']},HideFlags:34,Enchantments:[{}],custom_potion_effects:[{id:\"minecraft:instant_health\",amplifier:125b,duration:2000}],CustomPotionColor:8010938}"));
-                content.add(pot);
-                content.add(Items.BUNDLE);
-            } catch (CommandSyntaxException e) {
-                throw new RuntimeException(e);
-            }
-        });
+//        ItemGroupEvents.modifyEntriesEvent(ItemGroups.OPERATOR).register(content -> {
+//            try {
+//                ItemStack pot = ItemStack.fromNbtOrEmpty(BuiltinRegistries.createWrapperLookup(), StringNbtReader.parse("[item_name='{\"text\":\"Splash Potion of Instant Death\"}',potion_contents={potion:\"minecraft:healing\",custom_color:8010938,custom_effects:[{id:\"minecraft:instant_health\",amplifier:125,duration:2000,show_particles:0b}]}]"));
+////                pot.applyChanges(StringNbtReader.parse("{display:{Name:'{\"text\":\"Splash Potion of Instant Death\",\"color\":\"white\",\"italic\":false}',Lore:['{\"text\":\"Instant Death\",\"color\":\"red\",\"italic\":false}']},HideFlags:34,Enchantments:[{}],custom_potion_effects:[{id:\"minecraft:instant_health\",amplifier:125b,duration:2000}],CustomPotionColor:8010938}"));
+//                content.add(pot);
+////                pot = Items.LINGERING_POTION.getDefaultStack();
+////                pot.setNbt(StringNbtReader.parse("{display:{Name:'{\"text\":\"Lingering Potion of Instant Death\",\"color\":\"white\",\"italic\":false}',Lore:['{\"text\":\"Instant Death\",\"color\":\"red\",\"italic\":false}']},HideFlags:34,Enchantments:[{}],custom_potion_effects:[{id:\"minecraft:instant_health\",amplifier:125b,duration:2000}],CustomPotionColor:8010938}"));
+////                content.add(pot);
+//                content.add(Items.BUNDLE);
+//            } catch (CommandSyntaxException e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
         if (config.disableTutorialToast) {
             MinecraftClient.getInstance().execute(() -> MinecraftClient.getInstance().getTutorialManager().setStep(TutorialStep.NONE));
         }

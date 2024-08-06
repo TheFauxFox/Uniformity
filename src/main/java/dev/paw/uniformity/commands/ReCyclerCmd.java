@@ -4,7 +4,8 @@ import com.mojang.brigadier.CommandDispatcher;
 import dev.paw.uniformity.Uniformity;
 import dev.paw.uniformity.modules.ReCycler;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-import net.minecraft.registry.Registries;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import java.util.Arrays;
 import static com.mojang.brigadier.arguments.IntegerArgumentType.integer;
@@ -36,12 +37,12 @@ public class ReCyclerCmd {
                 }))
                 .then(literal("set").then(argument("enchant", word()).then(argument("threshold", integer(0, 56)).executes(command -> {
                     ReCycler rc = Uniformity.getModule(ReCycler.class);
-                    if (rc != null) {
+                    if (rc != null && MinecraftClient.getInstance().world != null) {
                         String enchant = command.getArgument("enchant", String.class).toUpperCase();
                         String enchantBase = enchant;
                         if (rc.getEnchantList().contains(enchant)) {
                             if (enchant.equals("SWEEPING_EDGE")) enchant = "SWEEPING";
-                            rc.targetEnchant = Registries.ENCHANTMENT.get(new Identifier("minecraft", enchant.toLowerCase()));
+                            rc.targetEnchant = MinecraftClient.getInstance().world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).get(Identifier.of("minecraft", enchant.toLowerCase()));
                             rc.chatMsg("Sucessfully set target enchant to " + enchantBase);
                         } else {
                             rc.chatMsg("§cFailed to set target enchant to " + enchantBase);

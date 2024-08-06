@@ -1,5 +1,8 @@
 package dev.paw.uniformity.utils;
 
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.text.Text;
+
 public class Str {
     public static String title(String s) {
         StringBuilder builder = new StringBuilder();
@@ -15,4 +18,7 @@ public class Str {
         return title(s.replace("minecraft:", "").replace("_", " "));
     }
 
+    public static Text getEnchantName(Enchantment enchantment) {
+        return enchantment.description().copy().append(enchantment.getMaxLevel() > 1 ? Text.translatable("enchantment.level." + enchantment.getMaxLevel()) : Text.empty());
+    }
 }
