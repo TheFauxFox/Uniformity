@@ -25,7 +25,6 @@
         "events.DisconnectedScreenMixin",
         "events.EntityRenderDispatcherMixin",
         "events.EntityRendererMixin",
-        "events.GameRendererMixin",
         "events.HorseScreenMixin",
         "events.InGameHudMixin",
         "events.InGameOverlayRendererMixin",

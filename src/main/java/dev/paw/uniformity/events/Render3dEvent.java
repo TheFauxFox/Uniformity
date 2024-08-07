@@ -9,12 +9,10 @@ public class Render3dEvent extends Event {
     public final MatrixStack matrices;
     public final float tickDelta;
     public final Camera camera;
-    public final BufferBuilderStorage bufferBuilders;
 
-    public Render3dEvent(MatrixStack matrixStack, float delta, Camera camera, BufferBuilderStorage bufferBuilders) {
+    public Render3dEvent(MatrixStack matrixStack, float delta, Camera camera) {
         matrices = matrixStack;
         tickDelta = delta;
         this.camera = camera;
-        this.bufferBuilders = bufferBuilders;
     }
 }
