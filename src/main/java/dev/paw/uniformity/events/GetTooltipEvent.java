@@ -3,7 +3,6 @@ package dev.paw.uniformity.events;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 
 import java.util.List;
